@@ -1,6 +1,9 @@
 create database chatbot_db;
 use chatbot_db;
 
+create user 'read_only_user'@'%' IDENTIFIED BY 'iii';
+GRANT SELECT ON example.cc102_users TO 'read_only_user'@'%' IDENTIFIED BY 'iii';
+
 CREATE TABLE users (
     user_open_id varchar(255),
     user_nickname varchar(255),
