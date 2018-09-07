@@ -1,12 +1,12 @@
-create database aws_cert_chatbot;
-use aws_cert_chatbot;
+create database chatbot_db;
+use chatbot_db;
 
 CREATE TABLE users (
     user_open_id varchar(255),
     user_nickname varchar(255),
     user_status varchar(255),
     user_img varchar(255),
-    user_register_date timestamp(6),
+    user_register_date varchar(255),
     user_register_menu varchar(255),
     PRIMARY KEY (user_open_id)
 );
