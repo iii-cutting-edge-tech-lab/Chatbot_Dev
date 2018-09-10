@@ -13,3 +13,8 @@ post /users 有一個變數的格式debug中
 都放在code/code.ipynb中
 目前 get /users 沒有用queryString 而是將資料庫全部抓出來
 之後再加備註
+
+* 9/10 
+新增了備註
+新增了logging套件和put /users接口
+put /users還有些許問題要改善

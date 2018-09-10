@@ -3,7 +3,7 @@ use chatbot_db;
 
 CREATE TABLE users (
     user_open_id varchar(255),
-    user_nickname varchar(255),
+    user_nick_name varchar(255),
     user_status varchar(255),
     user_img varchar(255),
     user_register_date varchar(255),
