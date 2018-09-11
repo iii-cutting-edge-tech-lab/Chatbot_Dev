@@ -1,7 +1,7 @@
 create database chatbot_db;
 use chatbot_db;
 
-CREATE TABLE users (
+create table users (
     user_open_id varchar(255),
     user_nick_name varchar(255),
     user_status varchar(255),
