@@ -18,3 +18,8 @@ post /users 有一個變數的格式debug中
 新增了備註
 新增了logging套件和put /users接口
 put /users還有些許問題要改善
+
+* 9/11
+解決了sql的一些問題
+解決了post跟put接口的一些問題
+
