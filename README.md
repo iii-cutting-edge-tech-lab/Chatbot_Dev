@@ -23,3 +23,7 @@ put /users還有些許問題要改善
 解決了sql的一些問題
 解決了post跟put接口的一些問題
 
+
+* 9/14
+將jupyter與db於docker-compose進行links
+將jupyter的CMD預設執行code.py開啟API服務
