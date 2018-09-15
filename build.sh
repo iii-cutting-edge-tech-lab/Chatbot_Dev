@@ -8,10 +8,10 @@ docker-compose up -d
 #docker-compose build $USERNAME/$IMAGE:latest .
 version=`cat VERSION`
 echo "version: $version"
-#version1=`cat VERSION1`
-#echo "version: $version1"
-docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:$version
-#docker tag asoo571314/jupyter-notebook $USERNAME/$IMAGE:$version1
+version1=`cat VERSION1`
+echo "version: $version1"
+docker tag db $USERNAME/$IMAGE:$version
+docker tag jupyter-tutorial $USERNAME/$IMAGE:$version1
 docker push $USERNAME/$IMAGE:$version
-#docker push $USERNAME/$IMAGE:$version1
+docker push $USERNAME/$IMAGE:$version1
 
