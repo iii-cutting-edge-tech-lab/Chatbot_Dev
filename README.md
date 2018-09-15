@@ -31,3 +31,8 @@ put /users還有些許問題要改善
 
 * 9/15
 將所有image更改為dockerfile形式
+
+*9/16
+開發完成 將jupyter 替換為ubuntu dockerfile 並更名為chatbot_api
+新增資料夾dockerfile來放置dockerfile檔案
+新增dockerfile-api及更新docker-compose

@@ -2,7 +2,7 @@ version: '3'
 services: 
   db: 
     build:
-      context: .
+      context: ./dockerfile
       dockerfile: dockerfile-mysql
     container_name: chatbot_db
     restart: always
@@ -13,16 +13,15 @@ services:
     volumes: 
       - ./mysql_data:/var/lib/mysql
       - ./mysql_init:/docker-entrypoint-initdb.d/
-  jupyter-tutorial:
+  api:
     build:
-      context: .
-      dockerfile: dockerfile-jupyterapi
-    container_name: jupyter_notebook
+      context: ./dockerfile
+      dockerfile: dockerfile-api
+    container_name: chatbot_api
     user: root
     environment:
       - GRANT_SUDO=yes
     ports:
-      - "8888:8888"
       - "5000:5000"
     depends_on:
       - db
