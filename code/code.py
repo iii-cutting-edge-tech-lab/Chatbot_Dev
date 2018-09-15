@@ -10,6 +10,10 @@ import datetime
 import pymysql
 
 
+#增加等待時間 
+import time
+time.sleep( 100 )
+
 #呼叫出Flask
 app = Flask(__name__)
 

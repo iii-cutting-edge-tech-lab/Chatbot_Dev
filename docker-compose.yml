@@ -18,6 +18,7 @@ services:
       context: ./dockerfile
       dockerfile: dockerfile-api
     container_name: chatbot_api
+    restart: always
     user: root
     environment:
       - GRANT_SUDO=yes

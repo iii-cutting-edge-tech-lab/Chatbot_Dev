@@ -36,3 +36,4 @@ put /users還有些許問題要改善
 開發完成 將jupyter 替換為ubuntu dockerfile 並更名為chatbot_api
 新增資料夾dockerfile來放置dockerfile檔案
 新增dockerfile-api及更新docker-compose
+更改code.py延時100秒連線資料庫
