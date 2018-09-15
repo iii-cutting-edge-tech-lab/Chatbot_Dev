@@ -9,8 +9,8 @@ version=`cat VERSION`
 echo "version: $version"
 version1=`cat VERSION1`
 echo "version: $version1"
-docker tag chatbot_db:latest $USERNAME/$IMAGE:$version
-docker tag jupyter_notebook:latest $USERNAME/$IMAGE:$version1
+docker tag chatbot_db $USERNAME/$IMAGE:$version
+docker tag jupyter_notebook $USERNAME/$IMAGE:$version1
 docker push $USERNAME/$IMAGE:$version
 docker push $USERNAME/$IMAGE:$version1
 
