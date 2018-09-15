@@ -26,4 +26,8 @@ put /users還有些許問題要改善
 
 * 9/14
 將jupyter與db於docker-compose進行links
+將code.ipynb打包為code.py
 將jupyter的CMD預設執行code.py開啟API服務
+
+* 9/15
+將所有image更改為dockerfile形式

@@ -1,8 +1,10 @@
 version: '3'
 services: 
   db: 
+    build:
+      context: .
+      dockerfile: dockerfile-mysql
     container_name: chatbot_db
-    image: mysql:5.7
     restart: always
     ports: 
       - "3306:3306"  
@@ -12,7 +14,9 @@ services:
       - ./mysql_data:/var/lib/mysql
       - ./mysql_init:/docker-entrypoint-initdb.d/
   jupyter-tutorial:
-    image: asoo571314/jupyter-notebook:1.0
+    build:
+      context: .
+      dockerfile: dockerfile-jupyterapi
     container_name: jupyter_notebook
     user: root
     environment:
