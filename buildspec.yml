@@ -10,8 +10,13 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - sh build.sh
+      - version=`cat VERSION`
+      - echo "version: $version"
+      - version1=`cat VERSION1`
+      - echo "version: $version1"
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 204065533127.dkr.ecr.ap-northeast-1.amazonaws.com/cc102_ecr_test:latest
+      - docker push 204065533127.dkr.ecr.ap-northeast-1.amazonaws.com/cc102_ecr_test:$version
+      - docker push 204065533127.dkr.ecr.ap-northeast-1.amazonaws.com/cc102_ecr_test:$version1
