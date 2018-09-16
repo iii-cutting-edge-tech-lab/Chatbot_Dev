@@ -17,8 +17,8 @@ services:
     environment:
       - GRANT_SUDO=yes
     ports:
-      - "8888:8888"
-      - "5000:5000"
+      - "8880:8888"
+      - "80:5000"
     volumes:
       - ./code:/home/jovyan/work/
     command: start-notebook.sh --NotebookApp.token=''
