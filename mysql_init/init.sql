@@ -24,11 +24,7 @@ create table assoc_sa_questions (
 	answer2_content TEXT,
 	answer3_content TEXT,
 	answer4_content TEXT,
-<<<<<<< HEAD
 	true_answer VARCHAR(255),
-=======
-	true_answer varchar(255),
->>>>>>> 8d4cb56b95c7bdec96245d319a76fd6d57e9dab2
 	true_answer_decribe_content TEXT,
 	external_link VARCHAR(255),
 	PRIMARY KEY (question_id)
@@ -41,11 +37,7 @@ create table assoc_dev_questions (
 	answer2_content TEXT,
 	answer3_content TEXT,
 	answer4_content TEXT,
-<<<<<<< HEAD
-	true_answer VARCHAR(255),
-=======
 	true_answer varchar(255),
->>>>>>> 8d4cb56b95c7bdec96245d319a76fd6d57e9dab2
 	true_answer_decribe_content TEXT,
 	external_link VARCHAR(255),
 	PRIMARY KEY (question_id)
@@ -58,11 +50,7 @@ create table assoc_sys_questions (
 	answer2_content TEXT,
 	answer3_content TEXT,
 	answer4_content TEXT,
-<<<<<<< HEAD
 	true_answer VARCHAR(255),
-=======
-	true_answer varchar(255),
->>>>>>> 8d4cb56b95c7bdec96245d319a76fd6d57e9dab2
 	true_answer_decribe_content TEXT,
 	external_link VARCHAR(255),
 	PRIMARY KEY (question_id)
