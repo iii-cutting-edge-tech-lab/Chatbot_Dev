@@ -23,16 +23,12 @@ services:
     environment:
       - GRANT_SUDO=yes
     ports:
-<<<<<<< HEAD
       - "8880:8888"
       - "80:5000"
-=======
-      - "5000:5000"
     depends_on:
       - db
     links:
       - db
->>>>>>> e767da85251ded558238902516fa73b612d0d707
     volumes:
       - ./code:/home/jovyan/work/
     command: python /home/jovyan/work/code.py
