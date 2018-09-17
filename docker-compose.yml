@@ -1,8 +1,11 @@
 version: '3'
 services: 
   db: 
+    build:
+      context: ./dockerfile
+      dockerfile: dockerfile-mysql
     container_name: chatbot_db
-    image: mysql:5.7
+    restart: always
     ports: 
       - "3306:3306"  
     environment: 
@@ -10,15 +13,26 @@ services:
     volumes: 
       - ./mysql_data:/var/lib/mysql
       - ./mysql_init:/docker-entrypoint-initdb.d/
-  jupyter-tutorial:
-    image: asoo571314/jupyter-notebook:1.0
-    container_name: jupyter_notebook
+  api:
+    build:
+      context: ./dockerfile
+      dockerfile: dockerfile-api
+    container_name: chatbot_api
+    restart: always
     user: root
     environment:
       - GRANT_SUDO=yes
     ports:
+<<<<<<< HEAD
       - "8880:8888"
       - "80:5000"
+=======
+      - "5000:5000"
+    depends_on:
+      - db
+    links:
+      - db
+>>>>>>> e767da85251ded558238902516fa73b612d0d707
     volumes:
       - ./code:/home/jovyan/work/
-    command: start-notebook.sh --NotebookApp.token=''
+    command: python /home/jovyan/work/code.py
