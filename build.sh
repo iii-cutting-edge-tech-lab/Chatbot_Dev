@@ -1,20 +1,21 @@
 set -ex
 #set registry
 USERNAME=204065533127.dkr.ecr.ap-northeast-1.amazonaws.com
-# image name
-IMAGE=cc102_cer_chatbot
-docker build -t $USERNAME/$IMAGE:mysql -f dockerfile/dockerfile-mysql dockerfile/
-docker build -t $USERNAME/$IMAGE:api -f dockerfile/dockerfile-api dockerfile/
-#docker build -t $USERNAME/$IMAGE:redis -f Chatbot_Line/dockerfile-redis Chatbot_Line/
-#docker build -t $USERNAME/$IMAGE:jupyter -f Chatbot_Line/dockerfile-jupyter Chatbot_Line/
-#docker build -t $USERNAME/$IMAGE:ngrok -f Chatbot_Line/dockerfile-ngrok Chatbot_Line/
+IAMGE1=api
+IAMGE2=mysql
 
 
-#docker-compse up -d
-#docker tag iii $USERNAME/$IMAGE:iii
-#docker build -t $USERNAME/$IMAGE:latest .
-#version=`cat VERSION`
-#echo "version: $version"
-#docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:$version
+docker build -t $USERNAME/$IAMGE1:latest -f dockerfile/dockerfile-api dockerfile/
+docker build -t $USERNAME/$IAMGE2:latest -f dockerfile/dockerfile-mysql dockerfile/
 
 
+
+api_ver=`cat api_ver`
+echo "redis_ver: $api_ver"
+docker tag $USERNAME/$IAMGE1:latest $USERNAME/$IAMGE1:$api_ver
+mysql_ver=`cat mysql_ver`
+echo "mysql_ver: $mysql_ver"
+docker tag $USERNAME/$IAMGE2:latest $USERNAME/$IAMGE2:$mysql_ver
+
+docker push $USERNAME/$IAMGE1:$api_ver
+docker push $USERNAME/$IAMGE2:$mysql_ver
