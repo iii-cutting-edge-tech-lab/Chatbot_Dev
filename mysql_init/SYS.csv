@@ -1,0 +1,1330 @@
+"ID","Q","1","2","3","4","ANS","TEXT","LINK","","","","","","","","","","","","","","","","","",""
+"1","You have a content management system running on an Amazon EC2 instance that is approaching 100% CPU utilization. Which option will reduce load on the Amazon EC2 instance?
+
+","(A)Create a load balancer, and register the Amazon EC2 instance with it","(B)Create a CloudFront distribution, and configure the Amazon EC2 instance as the origin","(C)Create an Auto Scaling group from the instance using the CreateAutoScalingGroup action
+","(D)Create a launch configuration from the instance using the Create Launch Configuration
+action","C","(A)Just by creating a load balancer can't help you reduce load.                                                      (B)CloudFront simply used to deliver content, not for load reducing.                                                                                                               (C)to create auto scaling group using the CreateAutoScalingGroup action to spread the load on all available EC2 instances.
+(D)There's no way using CreateAutoScalingGroup could help you.","https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-instance-asg.html","","","","","","","","","","","","","","","","","",""
+"2","A company is deploying a new two-tier web application in AWS. The company has limited staff and requires high availability, and the application requires complex queries and table joins. Which configuration provides the solution for the company's requirements?
+","(A)MySQL Installed on two Amazon EC2 Instances in a single Availability Zone","(B)Amazon RDS for MySQL with Multi-AZ","(C)Amazon ElastiCache
+","(D)Amazon DynamoDB","B","(A) is incorrect because it does not support the high availability requirement (single AZ)
+(C) is incorrect because ElastiCache is not a database
+(D) is incorrect because DynamoDB does not support table joins:","https://docs.aws.amazon.com/quicksight/latest/user/joining-tables.html","","","","","","","","","","","","","","","","","",""
+"3","You are deploying an application to collect votes for a very popular television show. Millions of users will submit votes using mobile devices. The votes must be collected into a durable, scalable, and highly available data store for real-time public tabulation. Which service should you use?
+","(A)Amazon DynamoDB","(B)Amazon Redshift","(C) Amazon Kinesis
+","(D)Amazon Simple Queue Service","A","The main function of DynamoDB is to store data. Where as the main function of ""Kinesis"" is to analyze data in real-time. The requirement in the question is to find an AWS service which provides highly available ""datastore"".
+","https://aws.amazon.com/kinesis/?sc_channel=PS&sc_campaign=acquisition_TW&sc_publisher=google&sc_medium=kinesis_b&sc_content=kinesis_p&sc_detail=amazon%20kinesis&sc_category=kinesis&sc_segment=165247724765&sc_matchtype=p&sc_country=TW&s_kwcid=AL!4422!3!165247724765!p!!g!!amazon%20kinesis&ef_id=Ww1PFwAAAsfZyufW:20180916111106:s","","","","","","","","","","","","","","","","","",""
+"4","You are building an automated transcription service in which Amazon EC2 worker instances process an uploaded audio file and generate a text file. You must store both of these files in the same durable storage until the text file is retrieved. You do not know what the storage capacity requirements are. Which storage option is both cost-efficient and scalable?
+","(A)Multiple Amazon EBS volume with snapshots","(B)A single Amazon Glacier vault","(C)A single Amazon S3 bucket
+","(D)Multiple instance stores","C","The AWS Simple Storage service is the best option for this scenario. The AWS documentation provides the following information on the Simple Storage service Amazon S3 is object storage built to store and retrieve any amount of data from anywhere - web sites and mobile apps, corporate applications, and data from IoT sensors or devices. It is designed to deliver 99.999999999% durability, and stores data for millions of applications used by market leaders in every industry For more information on the Simple Storage Service, please refer to the below link https://aws.amazon.com/s3/","https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html","","","","","","","","","","","","","","","","","",""
+"5","A user has a weighing plant. The user measures the weight of some goods every 5 minutes and sends data to AWS CloudWatch for monitoring and tracking. Which of the below mentioned parameters is mandatory for the user to include in the request list?","(A)Value","(B)(B)Namespace","(C)Metric Name","(D)Timezone","B","AWS CloudWatch supports the custom metrics. The user can always capture the custom data and upload the data to CloudWatch using CLI or APIs. The user can publish the data to CloudWatch as single data points or as an aggregated set of data points called a statistic set. The user has to always include the namespace as part of the request. The user can supply a file instead of the metric name. If the user does not supply the timezone, it accepts the current time. 
+6. point it will have parameters, such as value. However, if the user is sending as an aggregate it will have parameters, such as statistic-values. ","https://aws.amazon.com/cloudwatch/","","","","","","","","","","","","","","","","","",""
+"6","A user has created a VPC with CIDR 20.0.0.0/24. 
+The user has created a public subnet with CIDR
+20.0.0.0/25 and a private subnet with CIDR 20.0.0.128/25. 
+The user has launched one instance each in the private and public subnets.
+Which of the below mentioned options cannot be the correct IP address (private IP) assigned to an
+instance in the public or private subnet? ","(A)20.0.0.255","(B).20.0.0.122","(C)20.0.0.132 ","(D)20.0.0.55 ","A","When the user creates a subnet in VPC, he specifies the CIDR block for the subnet. In this case the user has created a VPC with the CIDR block 20.0.0.0/24, which supports 256 IP addresses (20.0.0.0 to 20.0.0.255.. The public subnet will have IP addresses between 20.0.0.0 – 20.0.0.127 and the private subnet will have IP addresses between 20.0.0.128 – 20.0.0.255. AWS reserves the first four IP addresses and the last IP address in each subnet’s CIDR block. These are not available for the user to use. Thus, the instance cannot have an IP address of 20.0.0.255","https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html","","","","","","","","","","","","","","","","","",""
+"7","Which of the following requires a custom CloudWatch metric to monitor?","(A)Data transfer of an EC2 instance","(B)Disk usage activity of an EC2 instance","(C)Memory Utilization of an EC2 instance
+","(D)CPU Utilization of an EC2mstance","B","The instance memory and disk space usage metrics are reported as Amazon CloudWatch custom metrics.","https://aws.amazon.com/blogs/aws/new-amazon-cloudwatch-monitoring-scripts/","","","","","","","","","","","","","","","","","",""
+"8","You have been asked to propose a multi-region deployment of a web-facing application where a
+controlled portion of your traffic is being processed by an alternate region.
+Which configuration would achieve that goal?","(A)Route53 record sets with weighted routing policy","((B)Route53 record sets with latency based routing policy","(C)Auto Scaling with scheduled scaling actions set
+","(D)Elastic Load Balancing with health checks enabled","A","Use the weighted routing policy when you have multiple resources that perform the same function (for example, web servers that serve the same website) and you want Amazon Route 53 to route traffic to those resources in proportions that you specify (for example, one quarter to one server and three quarters to the other). For more information about weighted resource record sets, see Weighted Routing.","https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Welcome.html","","","","","","","","","","","","","","","","","",""
+"9","You are running a web-application on AWS consisting of the following components an Elastic　Load Balancer (ELB) an Auto-Scaling Group of EC2 instances running Linux/PHP/Apache, and　Relational DataBase Service (RDS) MySQL.Which security measures fall into AWS's responsibility?","(A)Protect the EC2 instances against unsolicited access by enforcing the principle of least-privilege access","(B)Protect against IP spoofing or packet sniffing","(C)Assure all communication between EC2 instances and ELB is encrypted
+","(D)Install latest security patches on ELB. RDS and EC2 instances","B","AWS network provides protection against traditional network security issues:
+
+1 DDOS - AWS uses proprietary DDoS mitigation techniques. Additionally, AWS’s networks are multi-homed across a number of providers to achieve Internet access diversity.
+
+2 Man in the Middle attacks - AWS APIs are available via SSL-protected endpoints which provide server authentication
+
+3 IP spoofing - AWS-controlled, host-based firewall infrastructure will not permit an instance to send traffic with a source IP or MAC address other than its own.
+
+4 Port Scanning - Unauthorized port scans by Amazon EC2 customers are a violation of the AWS Acceptable Use Policy. When unauthorized port scanning is detected by AWS, it is stopped and blocked. Penetration/Vulnerability testing can be performed only on your own instances, with mandatory advance approval, and must not violate the AWS Acceptable Use Policy.
+
+5 Packet Sniffing by other tenants - It is not possible for a virtual instance running in promiscuous mode to receive or “sniff” traffic that is intended for a different virtual instance. While you can place your interfaces into promiscuous mode, the hypervisor will not deliver any traffic to them that is not addressed to them. Even two virtual instances that are owned by the same customer located on the same physical host cannot listen to each other’s traffic.","https://aws.amazon.com/elasticloadbalancing/","","","","","","","","","","","","","","","","","",""
+"10","You are running a web-application on AWS consisting of the following components an Elastic Load Balancer (ELB) an Auto-Scaling Group of EC2 instances running Linux/PHP/Apache, and Relational DataBase Service (RDS) MySQL. Which security measures fall into AWS’s responsibility?","(A)Protect the EC2 instances against unsolicited access by enforcing the principle of least-privilege access (User responsibility)","(B)Protect against IP spoofing or packet sniffing","(C)Assure all communication between EC2 instances and ELB is encrypted (User responsibility)","(D)Install latest security patches on ELB. RDS and EC2 instances (User responsibility)","B","Protect against IP spoofing or packet sniffing
+As per the shared responsibility shown below, the users are required to control the EC2 security via security groups and network access control layers. For more information on the Shared Responsibility model, please refer the below URL: https://aws.amazon.com/compliance/shared-responsibility-model/","https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html","","","","","","","","","","","","","","","","","",""
+"11","A user has two EC2 instances running in two separate regions.  The user is running an internal memory management tool,  which captures the data and sends it to CloudWatch in US East, using a CLI with the same namespace and metric.  Which of the below mentioned options is true with respect to the above statement?","(A)The setup will not work as CloudWatch cannot receive data across regions","(B)CloudWatch will receive and aggregate the data based on the namespace and metric","(C)CloudWatch will give an error since the data will conflict due to two sources","(D)CloudWatch will take the data of the server, which sends the data first","B","Amazon CloudWatch does not differentiate the source of a metric when receiving custom data. If the user is publishing a metric with the same namespace and dimensions from different sources, CloudWatch will treat them as a single metric. If the data is coming with the same timezone within a minute, CloudWatch will aggregate the data. It treats these as a single metric, allowing the user to get the statistics, such as minimum, maximum, average, and the sum of all across all servers.","https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/GetMetricAutoScalingGroup.html","","","","","","","","","","","","","","","","","",""
+"12","You are deploying an application to track GPS coordinates of delivery trucks in the United States. Coordinates are transmitted from each delivery truck once every three seconds. You need to design an architecture that will enable real-time processing of these coordinates from multiple consumers. Which service should you use to implement data ingestion?
+","(A)Amazon Kinesis","(B)AWS Data Pipeline","Amazon AppStream
+","(D)Amazon Simple Queue Service","A","Use Amazon Kinesis Streams to collect and process large streams of data records in real time. You'll create data-processing applications, known as Amazon Kinesis Streams applications. A typical Amazon Kinesis Streams application reads data from an Amazon Kinesis stream as data records. These applications can use the Amazon Kinesis Client Library, and they can run on Amazon EC2 instances. The processed records can be sent to dashboards, used to generate alerts, dynamically change pricing and advertising strategies, or send data to a variety of other AWS services.","https://aws.amazon.com/kinesis/data-streams/","","","","","","","","","","","","","","","","","",""
+"13","How are the EBS snapshots saved on Amazon S3?
+","(A) Exponentially","(B)Incrementally","(C)EBS snapshots are not stored in the Amazon S3
+","(D) Decrementally","B","You can back up the data on your Amazon EBS volumes to Amazon S3 by taking point-in-time snapshots.  Snapshots are incremental backups, which means that only the blocks on the device that have changed after your most recent snapshot are saved. This minimizes the time required to create the snapshot and saves on storage costs by not duplicating data. ","https://aws.amazon.com/ebs/","","","","","","","","","","","","","","","","","",""
+"14","A user has setup a CloudWatch alarm on an EC2 action when the CPU utilization is above 75%. 
+The alarm sends a notification to SNS on the alarm state. 
+If the user wants to simulate the alarm action how can he achieve this?","(A)Run activities on the CPU such that its utilization reaches above 75%","(B)From the AWS console change the state to ‘Alarm’","(C)The user can set the alarm state to ‘Alarm’ using CLI","(D)Run the SNS action manually","C","Amazon CloudWatch alarms watch a single metric over a time period that the user specifies and performs one or more actions based on the value of the metricrelative to a given threshold over a number of time periods. The user can test an alarm by setting it to any state using the SetAlarmState API (mon-set-alarm-statecommand..  This temporary state change lasts only until the next alarm comparison occurs.","https://docs.aws.amazon.com/AmazonCloudWatch/latest/cli/cli-mon-set-alarm-state.html","","","","","","","","","","","","","","","","","",""
+"15","A user has created photo editing software and hosted it on EC2.  The software accepts requests from the user about the photo format and resolution and sends a message to S3 to enhance the picture accordingly.  Which of the below mentioned AWS services will help make a scalable software with the AWS infrastructure in this scenario? ","(A)AWS Elastic Transcoder","(B)AWS Simple Queue Service"," (C)AWS Simple Notification Service 
+","(D)AWS Glacier ","D","(A) non sense answer 
+(B) For video and audio only                                                                 (C) No scale with SNS","https://docs.aws.amazon.com/amazonglacier/latest/dev/introduction.html","","","","","","","","","","","","","","","","","",""
+"16","A user has created an EBS volume of 10 GB and attached it to a running instance. The user is trying to access EBS for first time. Which of the below mentioned options is the correct statement with respect to a first time EBS access? ","(A)The volume will be blank","(B)If the EBS is mounted it will ask the user to create a file system","(C)The volume will show a loss of the IOPS performance the first time 
+"," (D)The volume will show a size of 8 GB","C","(C) New volumes are raw block devices, and you need to create a file system on them before you can mount and use them.”","https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/EBSVolumeTypes.html","","","","","","","","","","","","","","","","","",""
+"17","You have set up Individual AWS accounts for each project. You have been asked to make sure
+your AWS Infrastructure costs do not exceed the budget set per project for each month.
+Which of the following approaches can help ensure that you do not exceed the budget each month?","(A)Consolidate your accounts so you have a single bill for all accounts and projects","(B)Set up auto scaling with CloudWatch alarms using SNS to notify you when you are running too
+many Instances in a given account","(C)Set up CloudWatch billing alerts for all AWS resources used by each project, with a notification　occurring when the amount for each resource tagged to a particular project matches the budget　allocated to the project.
+","(D)Set up CloudWatch billing alerts for all AWS resources used by each account, with email　notifications when it hits 50%. 80% and 90% of its budgeted monthly spend","C","(C） is WRONG because you are accounting by resource. Management doesn't care if RDS useage exceeds budget across all projects. Management cares about the SALES project/account exceeding budget.                                                                                                                                                                                                                                                                               (D) You have set up Individual AWS accounts for each project. You have 
+been asked to make sure your AWS Infrastructure costs do not exceed the 
+budget set per project for each month.
+","https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/monitor-charges.html","","","","","","","","","","","","","","","","","",""
+"18","When creation of an EBS snapshot Is initiated but not completed the EBS volume?","(A)Cannot De detached or attached to an EC2 instance until me snapshot completes","((B)Can be used in read-only mode while me snapshot is in progress","(C)Can be used while me snapshot Is in progress
+","(D)Cannot be used until the snapshot completes","C","Snapshots occur asynchronously; the point-in-time snapshot is created immediately, but the status of the snapshot is pending until the snapshot is complete (when all of the modified blocks have been transferred to Amazon S3), which can take several hours for large initial snapshots or subsequent snapshots where many blocks have changed. While it is completing, an in-progress snapshot is not affected by ongoing reads and writes to the volume.""","https://aws.amazon.com/premiumsupport/knowledge-center/ebs-snapshot-stuck/","","","","","","","","","","","","","","","","","",""
+"19","A user is sending the data to CloudWatch using the CloudWatch API. The user is sending data 90 minutes in the future. What will CloudWatch do in this case?","(A)CloudWatch will accept the data","(B)(B)It is not possible to send data of the future","(C)It is not possible to send the data manually to CloudWatch","(D)The user cannot send data for more than 60 minutes in the future","A","Just drag and drop the folder using the flash tool provided by S3 
+","https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/Welcome.html","","","","","","","","","","","","","","","","","",""
+"20","A customer is running a multi-tier web application farm in a virtual private cloud (VPC) that is not connected to their corporate network. They are connecting to the VPC over the Internet to manage all of their Amazon EC2 instances running in both the public and private subnets. They have only authorized thebastion-security-group with Microsoft Remote Desktop Protocol (RDP) access to the application instance security groups, but the company wants to further limit administrative access to all of the instances in the VPC. Which of the following Bastion deployment scenarios will meet this requirement?
+","Deploy a Windows Bastion host on the corporate network that has RDP access to all instances in the VPC.","(B)Deploy a Windows Bastion host with an Elastic IP address in the public subnet and
+allow SSH access to the bastion from anywhere.","(C)Deploy a Windows Bastion host with an Elastic IP address in the private subnet,
+","(D)Deploy a Windows Bastion host with an auto-assigned Public IP address in the
+public subnet, and allow RDP access to the bastion from only the corporate public IP
+addresses.","D","For D to be correct we would need Elastic IP assigned to have static public IP. With auto assign public IP will change each time instance is rebooted. So DNS name will be the only way how to connect to bastion host.","https://aws.amazon.com/blogs/security/controlling-network-access-to-ec2-instances-using-a-bastion-server/","","","","","","","","","","","","","","","","","",""
+"21","You have been tasked with creating a VPC network topology for your company. The VPC network must support both Internet-facing applications and internally-facing applications accessed only over VPN. Both Internet-facing and internally-facing applications must be able to leverage at least three AZs for high availability. 
+At a minimum, how many subnets must you create within your VPC to accomodate these requirements?
+","(A)2","(B)3","(C)4","(D)6","D","The PUB (Public) and the PRV (Private) facing applications cannot coexist on the same subnet. That would be against all of the architecture's and security rules.  Also the scenario says ""Both Internet-facing and internally-facing applications must be able to leverage at LEAST THREE Availability Zones for high availability""  which means the PUB application with it's subnet requirement (one subnet per AZ) must have footprint into all THREE AZs.  That is the same for the PRV application. So the math is 3 subnets for the PUB application (1 subnet per AZ) and 3 subnets for the PRV application = 6 subnets total","https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Scenario2.html","","","","","","","","","","","","","","","","","",""
+"22","Can I delete a snapshot of the root device of an EBS volume used by a registered AMI?
+
+","(A) Only via API","(B)Only via Console","(C)Yes
+","(D)No","D","we can’t delete a snapshot of the root device of an EBS volume used by a registered AMI. You must first deregister the AMI before you can delete the snapshot.","https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/deregister-ami.html","","","","","","","","","","","","","","","","","",""
+"23","A user has created a VPC with CIDR 20.0.0.0/24. 
+The user has created a public subnet with CIDR 20.0.0.0/25. 
+The user is trying to create the private subnet with CIDR 20.0.0.128/25.
+Which of the below mentioned statements is true in this scenario? ","(A)This statement is wrong as AWS does not allow CIDR 20.0.0.0/25","(B)It will allow the user to create a private subnet with CIDR as 20.0.0.128/25","(C)It will not allow the user to create a private subnet due to a wrong CIDR range ","(D)It will not allow the user to create the private subnet due to a CIDR overlap ","B","When the user creates a subnet in VPC, he specifies the CIDR block for the subnet. The CIDR block of a subnet can be the same as the CIDR block for the VPC(for a single subnet in the VPC., or a subset (to enable multiple subnets.. If the user creates more than one subnet in a VPC, the CIDR blocks of the subnets mustnot overlap. Thus, in this case the user has created a VPC with the CIDR block 20.0.0.0/24, which supports 256 IP addresses (20.0.0.0 to 20.0.0.255.. The usercan break this CIDR block into two subnets, each supporting 128 IP addresses. One subnet uses the CIDR block 20.0.0.0/25 (for addresses 20.0.0.0 - 20.0.0.127.and the other uses the CIDR block 20.0.0.128/25 (for addresses 20.0.0.128 - 20.0.0.255","https://docs.aws.amazon.com/vpc/latest/peering/peering-configurations-full-access.html","","","","","","","","","","","","","","","","","",""
+"24","You are currently hosting multiple applications in a VPC and have logged numerous port scans coming in from a specific IP address block. Your security team has requested that all access from the offending IP address block be denied tor the next 24 hours. Which of the following is the best method to quickly and temporarily deny access from the specified IP address block?","(A)Create an AD policy to modify Windows Firewall settings on all hosts in the VPC to deny access from the IP address block","(B)Modify the Network ACLs associated with all public subnets in the VPC to deny access from
+the IP address block","(C)Add a rule to all of the VPC 5 Security Groups to deny access from the IP address block","(D)Modify the Windows Firewall settings on all Amazon Machine Images (AMIs) that
+your organization uses in that VPC to deny access from the IP address block","C","Answer is (B) ACL can have deny statements.
+Security groups only have allow statements, no deny so C is wrong.","https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html","","","","","","","","","","","","","","","","","",""
+"25","An organization has configured a VPC with an Internet Gateway (IGW). pairs of public and private subnets (each with one subnet per Availability Zone), and an Elastic Load Balancer (ELB) configured to use the public subnets The application s web tier leverages the ELB. Auto Scaling and a mum-AZ RDS database instance The organization would like to eliminate any potential single points ft failure in this design.What step should you take to achieve this organization's objective?","(A)Nothing, there are no single points of failure in this architecture.","(B)Create and attach a second IGW to provide redundant internet connectivity.","(C)Create and configure a second Elastic Load Balancer to provide a redundant load balancer.
+","(D)Create a second multi-AZ RDS instance in another Availability Zone and configurereplication
+to provide a redundant database.","C","ELB is designed to be HA across Availability Zones. You need multiple ELB if you want HA across regions.
+“AWS Load Balancer – Cross Network
+Many times it happens that after setting up your ELB, you experience significant drops in your performance. The best way to handle this situation is to start with identifying whether your ELB is single AZ or multiple AZ, as single AZ ELB is also considered as one of the Single Points of Failures on AWS Cloud. Once you identify your ELB, it is necessary to make sure ELB loads are kept cross regions.”","https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-register-lbs-with-asg.html","","","","","","","","","","","","","","","","","",""
+"26","Your entire AWS infrastructure lives inside of one Amazon VPC You have an Infrastructure
+monitoring application running on an Amazon instance in Availability Zone (AZ) A of the region,
+and another application instance running in AZ B. The monitoring application needs to make use
+of ICMP ping to confirm network reachability of the instance hosting the application.
+Can you configure the security groups for these instances to only allow the ICMP ping to pass
+from the monitoringinstance to the application instance and nothing else"" If so how?","(A)No Two instances in two different AZ's can't talk directly to each other via ICMP ping as that protocol is not allowed across subnet (iebroadcast) boundaries","(B)Yes Both the monitoring instance and the application instance have to be a part of the
+same security group, and that security group needs to allow inbound ICMP","(C)Yes, The security group for the monitoring instance needs to allow outbound ICMP and
+the application instance's security group needs to allow Inbound ICMP
+","(D)Yes, Both the monitoring instance's security group and the application instance's security
+group need to allow both inbound and outbound ICMP ping packets since ICMP is not a
+connection-oriented protocol","D","(A) is Incorrect; route tables enable communication between subnets / broadcast domains
+
+(B) is Incorrect; does not need to be single SG (see below,two EC2s, two SGs)
+
+(D)is Incorrect; as already discussed, SGs are stateful, so you do not need to create both Inbound and Outbound rules for same traffic type (this is what is needed with NACLs)","https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html","","","","","","","","","","","","","","","","","",""
+"27","A user is trying to understand AWS SNS. To which of the below mentioned end points is SNS unable to send a notification?","(A)Email JSON","(B)HTTP","(C)AWS SQS
+","(D)AWS SES","D","•“HTTP”, “HTTPS” – Subscribers specify a URL as part of the subscription registration; notifications will be delivered through an HTTP POST to the specified URL.
+
+•”Email”, “Email-JSON” – Messages are sent to registered addresses as email. Email-JSON sends notifications as a JSON object, while Email sends text-based email.
+
+•“SQS” – Users can specify an SQS queue as the endpoint; Amazon SNS will enqueue a notification message to the specified queue (which subscribers can then process using SQS APIs such as ReceiveMessage, DeleteMessage, etc.)","https://aws.amazon.com/sns/","","","","","","","","","","","","","","","","","",""
+"28","An organization wants to move to Cloud. They are looking for a secure encrypted database
+storage option. Which of the below mentioned AWS functionalities helps them to achieve this?","(A)AWS MFA with EBS","(B)AWS EBS encryption","(C)Multi-tier encryption with Redshift
+","(D)AWS S3 server side storage","B","create a folder in s3 bucket you won’t have permissions options.","https://www.google.com/search?client=ubuntu&channel=fs&q=AWS+EBS+encryption&ie=utf-8&oe=utf-8","","","","","","","","","","","","","","","","","",""
+"29","You have decided to change the Instance type for instances running In your application tier that
+are using Auto Scaling.
+In which area below would you change the instance type definition?","(A)Auto Scaling launch configuration","(B)Auto Scaling group","(C)Auto Scaling policy
+ ","(D)Auto Scaling tags","B","You can use this new functionality in a couple of different ways. You can move instances from one Auto Scaling Group to another to effect an architectural change or update. You can experiment with a mix of different EC2 instance types, adding and removing instances in order to find the best fit for your application.","https://docs.aws.amazon.com/autoscaling/ec2/userguide/GettingStartedTutorial.html","","","","","","","","","","","","","","","","","",""
+"30","You are attempting to connect to an instance in Amazon VPC without success. You have already
+verified that the VPC has an Internet Gateway (IGW) the instance has an associated Elastic IP
+(EIP) and correct security group rules are in place.
+Which VPC component should you evaluate next?","(A)The configuration of a MAT instance","(B)The configuration of the Routing Table","(C)The configuration of the internet Gateway (IGW)
+","(D)The configuration of SRC'DST checking","C","An internet gateway is a horizontally scaled, redundant, and highly available VPC component that allows communication between instances in your VPC and the internet. It therefore imposes no availability risks or bandwidth constraints on your network traffic.","https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html","","","","","","","","","","","","","","","","","",""
+"31","You have been asked to automate many routine systems administrator backup and recovery activities Your current plan is to leverage AWS-managed solutions as much as possible and automate the rest with the AWS CU and scripts. Which task would be best accomplished with a script?","(A)Creating daily EBS snapshots with a monthly rotation of snapshots","(B)Creating daily ROS snapshots with a monthly rotation of snapshots","(C)Automatically detect and stop unused or underutilized EC2 instances
+","(D)Automatically add Auto Scaled EC2 instances to an Amazon Elastic Load Balancer","C","(B) is taken care by RDS and (C) & (D) is by Autoscaling","https://aws.amazon.com/about-aws/whats-new/2013/01/08/use-amazon-cloudwatch-to-detect-and-shut-down-unused-amazon-ec2-instances/","","","","","","","","","","","","","","","","","",""
+"32","Your team Is excited about theuse of AWS because now they have access to programmable Infrastructure"" You have been asked to manage your AWS infrastructure In a manner similar to the way you might manage application code You want to be able to deploy exact copies of different versions of your infrastructure, stage changes into different environments, revert back to previous versions, and identify what versions are running at any particular time (development test QA. production). Which approach addresses this requirement?","(A)Use cost allocation reports and AWS Opsworks to deploy and manage your infrastructure.","(B)Use AWS CloudWatch metrics and alerts along with resource tagging to deploy and manage
+your infrastructure.","(C)Use AWS Beanstalk and a version control system like GIT to deploy and manage your infrastructure.
+","(D)Use AWS CloudFormation and a version control system like GIT to deploy and manage your
+infrastructure.","D","(A) is wrong, Chef can go fetch versions from Github or Subversion, and is a configuration management tool
+(B) is wrong , use CloudWatch to track resource allocations via high/low watermarks and alarms
+(C) is wrong, Elastic Beanstalk runs a single version of your application.                                                                                    (D) Cloud Formation for multiple infrastructure versions.","https://aws.amazon.com/cloudformation/","","","","","","","","","","","","","","","","","",""
+"33","An organization has created 50 IAM users. The organization has introduced a new policy which
+will change the access of an IAM user. How can the organization implement this effectively so that
+there is no need to apply the policy at the individual user level?","(A)Use the IAM groups and add users as per their role to different groups and apply policy to group","(B)The user can create a policy and apply it to multiple users in a single go with the AWS CLI","(C)Add each user to the IAM role as per their organization role to achieve effective policy setup
+","(D)Use the IAM role and implement access at the role level","A","Use the IAM groups and add users as per their role to different groups and apply policy to group
+
+An IAM group is a collection of IAM users. You can use groups to specify permissions for a collection of users, which can make those permissions easier to manage for those users.","https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups.html","","","","","","","","","","","","","","","","","",""
+"34","A user is planning to use AWS Cloud formation for his automatic deployment requirements. Which of the below mentioned components are required as a part of the template?","(A)Parameters","(B)Outputs","(C)Template version
+","(D)Resources","D","A template is a JSON-formatted text file that describes your AWS infrastructure. Templates include several major sections. The Resources section is the only section that is required.","https://aws.amazon.com/cloudformation/","","","","","","","","","","","","","","","","","",""
+"35","A user has setup a CloudWatch alarm on an EC2 action when the CPU utilization is above 75%. The alarm sends a notification to SNS on the alarm state. If the user wants to simulate the alarm action how can he achieve this?","(A)Run activities on the CPU such that its utilization reaches above 75%","(B)(B)From the AWS console change the state to ‘Alarm’","(C)The user can set the alarm state to ‘Alarm’ using CLI
+","(D)Run the SNS action manually","C","You can test an alarm by setting it to any state using the SetAlarmState API (mon-set-alarm-state command). This temporary state change lasts only until the next alarm comparison occurs.","https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/set-alarm-state.html","","","","","","","","","","","","","","","","","",""
+"36","A user is trying to save some cost on the AWS services. Which of the below mentioned options will not help him save cost?","(A)Delete the unutilized EBS volumes once the instance is terminated","(B)Delete the AutoScaling launch configuration after the instances are terminated","(C)Release the elastic IP if not required once the instance is terminated
+","(D)Delete the AWS ELB after the instances are terminated","B","ACD the correct answer as the ELB cost without even using it , the EBS volume will drive cost as you reserve some store, and the EIB if it is not attached to instance will cost you as well","https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-process-shutdown.html","","","","","","","","","","","","","","","","","",""
+"37","A user is trying to aggregate all the CloudWatch metric data of the last 1 week. Which of the below mentioned statistics is not available for the user as a part of data aggregation?","(A)Aggregate","(B)Sum","(C)Sample data
+","(D)Average","A","CloudWatch supports Sum, Min, Max, Sample Data and Average statistics aggregation.","https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/GetSingleMetricAllDimensions.html","","","","","","","","","","","","","","","","","",""
+"38","An organization is setting up programmatic billing access for their AWS account. Which of the below mentioned services is not required or enabled when the organization wants to use programmatic access?","(A)Programmatic access","(B)AWS bucket to hold the billing report","(C)AWS billing alerts
+","(D)Monthly Billing report","C","when you are programming the bills to be available on particular schedule. These bills are typically in .CSV format.","https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html","","","","","","","","","","","","","","","","","",""
+"39","A user is planning to use AWS Cloudformation. Which of the below mentioned functionalities does not help him to correctly understand Cloudfromation?","(A)Cloudformation follows the DevOps model for the creation of Dev & Test","(B)AWS Cloudfromation does not charge the user for its service but only charges for the
+AWS resources
+created with it","(C)Cloudformation works with a wide variety of AWS services, such as EC2, EBS, VPC, IAM,S3, RDS, ELB, etc
+","(D)CloudFormation provides a set of application bootstrapping scripts which enables the user
+to install
+Software","A","Cloudformation follows the DevOps model for the creation of Dev & Test","https://aws.amazon.com/dev-test/","","","","","","","","","","","","","","","","","",""
+"40","A user wants to disable connection draining on an existing ELB. Which of the below mentioned statements helps the user disable connection draining on the ELB?","(A)The user can only disable connection draining from CLI","(B) It is not possible to disable the connection draining feature once enabled","(C)The user can disable the connection draining feature from EC2 -> ELB console or from CLI
+","(D)The user needs to stop all instances before disabling connection draining","C","The Elastic Load Balancer connection draining feature causes the load balancer to stop
+sending new requests to the back-end instances when the instances are deregistering or
+become unhealthy, while ensuring that inflight requests continue to be served. The user
+can enable or disable connection draining from the AWS EC2 console -> ELB or using CLI","https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html","","","","","","","","","","","","","","","","","",""
+"41","A user has a refrigerator plant. The user is measuring the temperature of the plant every 15 minutes. If the user wants to send the data to CloudWatch to view the data visually, which of the below mentioned statements is true with respect to the information given above?","(A)The user needs to use AWS CLI or API to upload the data","(B)The user can use the AWS Import Export facility to import data to CloudWatch","(C)The user will upload data from the AWS console
+","(D)The user cannot upload data to CloudWatch since it is not an AWS service metric","A","The user needs to use AWS CLI or API to upload the data","https://aws.amazon.com/cli/","","","","","","","","","","","","","","","","","",""
+"42","Which set of Amazon S3 features helps to prevent and recover from accidental data loss?
+
+","(A)Object lifecycle and service access logging","(B)Object versioning and Multi-factor authentication","(C)Access controls and server-side encryption
+","(D)Website hosting and Amazon S3 policies","B","Versioning-enabled buckets enable you to recover objects from accidental deletion or overwrite
+
+In addition to that, they have made it a requirement that delete operations on versioned data can only be done using MFA (Multi factor authentication)","https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html","","","","","","","","","","","","","","","","","",""
+"43","A t2.medium EC2 instance type must be launched with what type of Amazon Machine
+Image (AMI)?
+","(A)An Instance store Hardware Virtual Machine AMI","(B)An Instance store Paravirtual AMI","(C)An Amazon EBS-backed Hardware Virtual Machine AMI","(C)An Amazon EBS-backed Paravirtual AMI","C","as per explanation link:
+You must launch a T2 instance using an HVM AMI. For more information, see Linux AMI Virtualization Types.
+
+You must launch your T2 instances using an EBS volume as the root device. For more information, see Amazon EC2 Root Device Volume.","https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html","","","","","","","","","","","","","","","","","",""
+"44","A photo-sharing service stores pictures in Amazon Simple Storage Service (S3) and allows application sign-in using an OpenID Connect-compatible identity provider. Which AWS Security Token Service approach to temporary access should you use for the Amazon S3 operations?
+","(A) SAML-based Identity Federation","(B) Cross-Account Access","(C) AWS Identity and Access Management roles","(D)  Web Identity Federation","D","Web identity federation – You can let users sign in using a well-known third party identity provider such as Login with Amazon, Facebook, Google, or any OpenID Connect (OIDC) 2.0 compatible provider.
+
+AWS STS web identity federation supports Login with Amazon, Facebook, Google, and any OpenID Connect (OICD)-compatible identity provider.","https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc.html","","","","","","","","","","","","","","","","","",""
+"45","You manually launch a NAT AMI in a public subnet. The network is properly configured. Security groups and network access control lists are property configured. Instances in a private subnet can access the NAT. The NAT can access the Internet. However, private instances cannot access the Internet. What additional step is required to allow access from the private instances?
+","(A) Enable Source/Destination Check on the private Instances.","(B) Enable Source/Destination Check on the NAT instance.","(C) Disable Source/Destination Check on the private instances.
+ ","(D)  Disable Source/Destination Check on the NAT instance.","D","By default the NAT will perform Source Checks before it forwards the packet it received from EC2 instance out to the Internet and hence Source Checks need to be disabled on the NAT instance.","https://docs.aws.amazon.com/vpc/latest/userguide/VPC_NAT_Instance.html","","","","","","","","","","","","","","","","","",""
+"46","Your entire AWS infrastructure lives inside of one Amazon VPC. You have an Infrastructure monitoring application running on an Amazon instance in Availability Zone (AZ) A of the region, and another application instance running in AZ B. The monitoring application needs to make use of ICMP ping to confirm network reachability of the instance hosting the application. Can you configure the security groups for these instances to only allow the ICMP ping to pass from the monitoring instance to the application instance and nothing else? If so how","(A)No, two instances in two different AZ's can't talk directly to each other via ICMP ping as that protocol is not allowed across subnet (iebroadcast) boundaries","(B)Yes, both the monitoring instance and the application instance have to be a part of the same security group, and that security group needs to allow inbound ICMP","(C)Yes, the security group for the monitoring instance needs to allow outbound ICMP and the application instance's security group needs to allow Inbound ICMP","(D)Yes, both the monitoring instance's security group and the application instance's security group need to allow both inbound and outbound ICMP ping packets since ICMP is not a connection-oriented protocol","D","Both security groups should allow Inbound ICMP","https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html","","","","","","","","","","","","","","","","","",""
+"47","You have a web-style application with a stateless but CPU and memory-intensive web tier running on a cc2 8xlarge EC2 instance inside of a VPC The instance when under load is having problems returning requests within the SLA as defined by your business The application maintains its state in a DynamoDB table, but the data tier is properly provisioned and responses are consistently fast.
+How can you best resolve the issue of the application responses not meeting your SLA?","(A)Add another cc2 8xlarge application instance, and put both behind an Elastic Load Balancer","(B)Move the cc2 8xlarge to the same Availability Zone as the DynamoDB table","(C)Cache the database responses in ElastiCache for more rapid access","(D)Move the database from DynamoDB to RDS MySQL in scale-out read-replica configuration","B","stateless – so you cant use load balancer.. And its a VPC so they both are may be in different availability zone.. Placing this web/app server along with the DB server since they store the sessions in Dynamo DB is the right answer","https://www.google.com/search?client=ubuntu&hs=VSF&channel=fs&ei=FFyeW43KBYuH8wX80qzgDQ&q=crosszone+archive+aws&oq=crosszone+archive+aws&gs_l=psy-ab.3...5370.10991.0.11083.28.25.2.0.0.0.144.1758.19j4.25.0..2..0...1.1.64.psy-ab..1.22.1484.6..0j0i7i30k1j0i30k1j35i39k1j0i67k1j0i203k1j0i10i203k1j0i10k1j0i22i30k1j0i22i10i30k1j33i160k1j33i21k1.148.30GuQrmX34U","","","","","","","","","","","","","","","","","",""
+"48","You are designing a system that has a Bastion host. This component needs to be highly available without human intervention. Which of the following approaches would you select?","(A)Run the bastion on two instances one in each AZ","(B)Run the bastion on an active Instance in one AZ and have an AMI ready to boot up in the event of failure","(C)Configure the bastion instance in an Auto Scaling group. Specify the Auto Scaling group to include multiple AZs but have a min-size of 1 and max-size of 1","(D)Configure an ELB in front of the bastion instance","C","For answer A, even you have two instances in two AZ, if both of them happens to have issue with the underlying host or with the OS at the same time, you will have no available bastion host and you need to manually relaunch the instance.
+
+However for answer C, the ASG will keep an eye on the instance health, if the instance failed the status check, ASG is going to kill the existing instance and automatically launch a new one. Together with multi AZ ASG, even if u only have one instance in one AZ at a time, its highly available because if the instance fail or you lost an AZ, ASG will spin up a new instance in the available AZ automatically. This is call self healing","https://docs.aws.amazon.com/quickstart/latest/linux-bastion/architecture.html","","","","","","","","","","","","","","","","","",""
+"49","You run a web application where web servers on EC2 Instances are in an Auto Scaling group. Monitoring over the last 6 months shows that 6 web servers are necessary to handle the minimum load During the day up to 12 servers are needed five to six days per year, the number of web servers required might go up to 15.
+What would you recommend to minimize costs while being able to provide hill availability?","(A)6 Reserved instances (heavy utilization). 6 Reserved instances {medium utilization), rest covered by On-Demand instances","(B)6 Reserved instances (heavy utilization). 
+6 On-Demand instances, rest covered by Spot Instances","(C)6 Reserved instances (heavy utilization) 6 Spot instances, rest covered by On-Demand instances","(D)6 Reserved instances (heavy utilization) 6 Reserved instances (medium utilization) rest covered by Spot instances","B","(B)as the 2nd 6 instances not always needed, should be choose on-demand type instance, not the always there reserved type.","https://aws.amazon.com/about-aws/whats-new/2018/01/introducing-aws-auto-scaling/","","","","","","","","","","","","","","","","","",""
+"50","You have set up Individual AWS accounts for each project. You have been asked to make sure your AWS Infrastructure costs do not exceed the budget set per project for each month. Which of the following approaches can help ensure that you do not exceed the budget each month?","(A)Consolidate your accounts so you have a single bill for all accounts and projects","(B)Set up auto scaling with CloudWatch alarms using SNS to notify you when you are running too many Instances in a given account","(C)Set up CloudWatch billing alerts for all AWS resources used by each project, with a notification occurring when the amount for each resource tagged to a particular project matches the budget allocated to the project.","(D)Set up CloudWatch billing alerts for all AWS resources used by each account, with email notifications when it hits 50%. 80% and 90% of its budgeted monthly spend","D","because the action should be “prevention” and option (C) just alert when the project bill matched the budget.","https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/gs_monitor_estimated_charges_with_cloudwatch.html","","","","","","","","","","","","","","","","","",""
+"51","If you want to launch Amazon Elastic Compute Cloud (EC2) Instances and assign each Instance a predetermined private IP address you should:","(A)  Assign a group or sequential Elastic IP address to the instances ","(B)  Launch the instances in a Placement Group","(C) Launch the instances in the Amazon virtual Private Cloud (VPC).","(D) Use standard EC2 instances since each instance gets a private Domain Name Service (DNS) already","C","Each & every EC2 instance use a private IP attached to its ENI. When you launch an instance it gives you an option to assign primary & secondary private IP addresses from your selected subnet. The default setting is to draw a private IP from the same subnet randomly. Yes you always launch an EC2 instance in a VPC; previoulsy it was different when they used to have Classic EC2 model.","https://www.edureka.co/blog/interview-questions/top-aws-architect-interview-questions-2016/","","","","","","","","","","","","","","","","","",""
+"52","An existing application stores sensitive information on a non-boot Amazon EBS data volume attached to an Amazon Elastic Compute Cloud instance. Which of the following approaches would protect the sensitive data on an Amazon EBS volume?
+","(A)Upload your customer keys to AWS CloudHSM. Associate the Amazon EBS volume with AWS CloudHSM. Re-mount the Amazon EBS volume.","(B)Create and mount a new, encrypted Amazon EBS volume. Move the data to the new
+volume. Delete the old Amazon EBS volume.","(C)Unmount the EBS volume. Toggle the encryption attribute to True. Re-mount the
+Amazon EBS volume","(D)Snapshot the current Amazon EBS volume. Restore the snapshot to a new, encrypted
+Amazon EBS volume. Mount the Amazon EBS volume
+","D","
+The reason D is not a valid answer is because you cannot ever restore a snapshot to an existing volume. You can use a snapshot to create a volume, but you cannot restore a snapshot over the top of a volume.
+
+The best steps to follow are
+
+1. Snapshot the current Amazon EBS volume
+
+2. Copy the unencrypted snapshot and choose the ""Encrypt this snapshot"" option
+
+3. Create a volume from the now-encrypted snapshot
+
+4. Mount the Amazon EBS volume","https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-snapshot.html","","","","","","","","","","","","","","","","","",""
+"53","You are attempting to connect to an instance in Amazon VPC without success. 
+You have already verified that the VPC has an Internet Gateway (IGW) the instance has an associated Elastic IP (EIP) and correct security group rules are in place.
+Which VPC component should you evaluate next?","(A)The configuration of a NAT instance","(B)The configuration of the Routing Table","(C)The configuration of the internet Gateway (IGW)","(D)The configuration of SRC/DST checking","B","When instance has internet Gateway attached and EIP is associated then you will have to check the route table.
+
+","https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html","","","","","","","","","","","","","","","","","",""
+"54","You are tasked with the migration of a highly trafficked Node JS application to AWS in order to comply with organizational standards Chef recipes must be used to configure the application servers that host this application and to support application lifecycle events.
+Which deployment option meets these requirements while minimizing administrative burden?","(A)Create a new stack within Opsworks add the appropriate layers to the stack and deploy the application","(B)Create a new application within Elastic Beanstalk and deploy this application to a new environment","(C)Launch a Mode JS server from a community AMI and manually deploy the application to the launched EC2 instance","(D)Launch and configure Chef Server on an EC2 instance and leverage the AWS CLI to launch application servers and configure those instances using Chef.","A","as OpsWorks heavily leverages Chef, much more so than Elastic Beanstalk which would be more aligned with tools like Python, .Net, Node JS, etc.","https://aws.amazon.com/opsworks/","","","","","","","","","","","","","","","","","",""
+"55","You are creating an Auto Scaling group whose Instances need to insert a custom metric into CloudWatch. Which method would be the best way to authenticate your CloudWatch PUT request?","(A)Create an IAM role with the Put MetricData permission and modify the Auto Scaling launch configuration to launch instances in that role","(B)Create an IAM user with the PutMetricData permission and modify the Auto Scaling
+launch configuration to inject the userscredentials into the instance User Data","(C)Modify the appropriate Cloud Watch metric policies to allow the Put MetricData permission to
+instances from the Auto Scaling group
+","(D)Create an IAM user with the PutMetricData permission and put the credentials in a
+private repository and have applications on the server pull the credentials as needed","A","Access to Amazon CloudWatch requires credentials.” Credentials are best distributed as policies associated with roles. That way the EC2 instace can created endles custom metrics with one role.","https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/permissions-reference-cw.html","","","","","","","","","","","","","","","","","",""
+"56","You receive a frantic call from a new DBA who accidentally dropped a table containing all your customers.
+Which Amazon RDS feature will allow you to reliably restore your database to within 5 minutes of when the mistake was made?","(A)Multi-AZ RDS","(B)RDS snapshots","(C)RDS read replicas","(D)RDS automated backup","D","because the automated backup allows you to choose from many snapshots, including the PITC reflected in the `describe-db-instances'","https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html","","","","","","","","","","","","","","","","","",""
+"57","A user is planning to use AWS Cloud formation for his automatic deployment requirements. 
+Which of the below mentioned components are required as a part of the template?","(A) Parameters","(B)Outputs","(C)Template version","(D)Resources","D","AWS Cloud formation is an application management tool which provides application modelling, deployment, configuration, management and related activities. 
+The template is a JSON-format, text- based file that describes all the AWS resources required to deploy and run an application. 
+It can have option fields, such as Template Parameters, Output, Data tables, and Template file format version. 
+The only mandatory value is Resource. The user can define the AWS services which will be used/ created by this template inside the Resource section","https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/what-are-resource-groups.html","","","","","","","","","","","","","","","","","",""
+"58","An organization's security policy requires multiple copies of all critical data to be replicated across at least a primary and backup data center. The organization has decided to store some critical data on Amazon S3. Which option should you implement to ensure this requirement is met?","(A)Use the S3 copy API to replicate data between two S3 buckets in different regions","(B)You do not need to implement anything since S3 data is automatically replicated between regions","(C)Use the S3 copy API to replicate data between two S3 buckets in different facilities within an AWS Region","(D)You do not need to implement anything since S3 data is automatically replicated between multiple facilities within an AWS Region","D","From the AWS docs, ""To increase durability, Amazon S3 synchronously stores your data across multiple facilities before confirming that the data has been successfully stored."" 
+S3 does support cross-region replication, but the data from the source bucket is copied to a separate bucket located in another region.","https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html","","","","","","","","","","","","","","","","","",""
+"59","Your team Is excited about the use of AWS because now they have access to programmable Infrastructure"" You have been asked to manage your AWS infrastructure in a manner similar to the way you might manage application code You want to be able to deploy exact copies of different versions of your infrastructure, stage changes into different environments, revert back to previous versions, and identify what versions are running at any particular time (development test QA. production).
+Which approach addresses this requirement?","(A)Use cost allocation reports and AWS Opsworks to deploy and manage your infrastructure.","(B)Use AWS CloudWatch metrics and alerts along with resource tagging to deploy and manage your infrastructure.","(C)Use AWS Beanstalk and a version control system like GIT to deploy and manage your infrastructure.","(D)Use AWS CloudFormation and a version control system like GIT to deploy and manage your infrastructure.","D","(A) is wrong, Chef can go fetch versions from Github or Subversion, and is a configuration management tool                  
+(B) is wrong , use CloudWatch to track resource allocations via high/low watermarks and alarms
+(C) is wrong, Elastic Beanstalk runs a single version of your application.                                                                          (D) Cloud Formation for multiple infrastructure versions.","https://aws.amazon.com/cloudformation/","","","","","","","","","","","","","","","","","",""
+"60","You have a server with a 5O0GB Amazon EBS data volume. The volume is 80% full. You need to back up the volume at regular intervals and be able to re-create the volume in a new Availability Zone in the shortest time possible. All applications using the volume can be paused for a period of a few minutes with no discernible user impact.
+Which of the following backup methods will best fulfill your requirements?","(A)Take periodic snapshots of the EBS volume","(B)Use a third party Incremental backup application to back up to Amazon Glacier","(C)Periodically back up all data to a single compressed archive and archive to Amazon S3 using a parallelized multi-part upload","(D)Create another EBS volume in the second Availability Zone attach it to the Amazon EC2 instance, and use a disk manager to mirror me two disks","D","answer D implies your attaching an EBS volume to the original EC2 instance in the original AZ and that’s not possible.
+
+EBS volumes can only be attached to EC2 instances within the same Availability Zone.
+
+","https://aws.amazon.com/ebs/","","","","","","","","","","","","","","","","","",""
+"61","How can the domain's zone apex for example ""myzoneapexdomain com"" be pointed towards an Elastic Load Balancer?","(A)By using an AAAA record","(B)By using an A record","(C)By using an Amazon Route 53 CNAME record","(D)By using an Amazon Route 53 Alias record","D","You can create an alias resource record set at the zone apex. You cannot create a CNAME record at the top node of a DNS namespace, also known as the zone apex. For example, if you register the DNS name example.com, the zone apex is example.com.","https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-choosing-alias-non-alias.html","","","","","","","","","","","","","","","","","",""
+"62","An organization has created 5 IAM users. 
+The organization wants to give them the same login ID but different passwords. How can the organization achieve this?","(A)The organization should create a separate login ID but give the IAM users the same alias so that each one can login with their alias","(B)The organization should create each user in a separate region so that they have their own URL to login","(C)It is not possible to have the same login ID for multiple IAM users of the same account","(D)The organization should create various groups and add each user with the same login ID to different groups. The user can login with their own group ID","C","AWS Identity and Access Management is a web service which allows organizations to manage users and user permissions for various AWS services. Whenever the organization is creating an IAM user, there should be a unique ID for each user. It is not possible to have the same login ID for multiple users. The names of users,groups, roles, instance profiles must be alphanumeric, including the following common characters: plus (+., equal (=., comma (,., period (.., at (@., and dash (-..","https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html","","","","","","","","","","","","","","","","","",""
+"63","A user is planning to evaluate AWS for their internal use. 
+The user does not want to incur any charge on his account during the evaluation. 
+Which of the below mentioned AWS services would incur a charge if used?","(A)AWS S3 with 1 GB of storage","(B)AWS micro instance running 24 hours daily","(C)AWS ELB running 24 hours a day","(D)AWS IOPS volume of 10 GB size","D","AWS is introducing a free usage tier for one year to help the new AWS customers get started in Cloud. 
+The free tier can be used for anything that the user wants to run in the Cloud. 
+AWS offers a handful of AWS services as a part of this which includes 750 hours of free micro instances and 750 hours of ELB. 
+It includes the AWS S3 of 5 GB and AWS EBS general purpose volume upto 30 GB. PIOPS is not part of free usage tier.","https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html","","","","","","","","","","","","","","","","","",""
+"64","A user has developed an application which is required to send the data to a NoSQL database. The user wants to decouple the data sending such that the application keeps processing and sending data but does not wait for an acknowledgement of DB. Which of the below mentioned applications helps in this scenario?","(A)AWS Simple Notification Service","(B)AWS Simple Workflow","(C)AWS Simple Queue Service","(D)AWS Simple Query Service","C","Amazon Simple Queue Service (SQS) is a fast, reliable, scalable, fully managed message queuing service. SQS makes it simple and cost-effective to decouple the components of a cloud application. You can use SQS to transmit any volume of data, at any level of throughput, without losing messages or requiring other services to be always available.","https://aws.amazon.com/sqs/","","","","","","","","","","","","","","","","","",""
+"65","An organization has created 50 IAM users. The organization has introduced a new policy which will change the access of an IAM user. How can the organization implement this effectively so that there is no need to apply the policy at the individual user level?","(A)Use the IAM groups and add users as per their role to different groups and apply policy to group","(B)The user can create a policy and apply it to multiple users in a single go with the AWS CLI","(C)Add each user to the IAM role as per their organization role to achieve effective policy setup","(D)Use the IAM role and implement access at the role level","A","Use the IAM groups and add users as per their role to different groups and apply policy to group
+
+An IAM group is a collection of IAM users. You can use groups to specify permissions for a collection of users, which can make those permissions easier to manage for those users.","https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-user-groups.html","","","","","","","","","","","","","","","","","",""
+"66","Your application currently leverages AWS Auto Scaling to grow and shrink as load Increases , decreases and has been performing well. Your marketing team expects a steady ramp up in traffic to follow an upcoming campaign that will result in a 20x growth in traffic over 4 weeks. (Your forecast for the approximate number of Amazon EC2 instances necessary to meet the peakdemand is 175)","(A)Ensure that you have pre-allocated 175 Elastic IP addresses so that each server will be able to obtain one as it launches","(B)Check the service limits in Trusted Advisor and adjust as necessary so the forecasted
+count remains within limits.","(C)Change your Auto Scaling configuration to set a desired capacity of 175 prior to the launch
+of the marketing campaign","(D)Pre-warm your Elastic Load Balancer to match the requests per second anticipated during
+peak demand prior to the marketing campaign","B","(A) Given that you'll almost certainly be using an ELB, you don't even need to give the EC2 instances public IP addresses, much less elastic ones.                                                                                 (B)Trusted Advisor is not the place where you request to have your service limits adjusted, but it is the place where you can check what your current service limits are and how close you've gotten to hitting them. Given that the default limit for EC2s is far below 175 (it's 20, I think), this limit will need to be addressed to prevent scaling failure
+
+(C) It would be massively wasteful to force scaling to 175 instances at the beginning of the campaign, when you still only need 9 of them. This is way overkill.
+
+(D)As I mentioned, above, I really do think you'll be using an ELB for this system, but prewarming ELBs is something you only have to do when you know to expect a sudden spike in requests, not the steady growth described in the question. (For example, you would prewarm your ""Green"" environment's ELB if you were about to cut your production deployment over from ""Blue"" to ""Green"".)","https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html","","","","","","","","","","","","","","","","","",""
+"67","A user has recently started using EC2. The user launched one EC2 instance in the default subnet in EC2-VPC. Which of the below mentioned options is not attached or available with the EC2 instance when it is launched?","(A)Public IP address","(B)Internet gateway","(C)Elastic IP","(D)Private IP address","C","EC2-VPC
+Allocating an Elastic IP address
+When you allocate an Elastic IP address, it’s for use in EC2-Classic; however, you can migrate an Elastic IP address to the EC2-VPC platform. For more information, see Migrating an Elastic IP Address from EC2-Classic to EC2-VPC.
+When you allocate an Elastic IP address, it’s for use only in a VPC.","https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html","","","","","","","","","","","","","","","","","",""
+"68","A user has launched an EC2 instance. 
+The user is planning to setup the CloudWatch alarm. 
+Which of the below mentioned actions is not supported by the CloudWatch alarm?","(A)Notify the Auto Scaling launch config to scale up","(B)Send an SMS using SNS","(C)Notify the Auto Scaling group to scale down","(D)Stop the EC2 instance","B","A user can create a CloudWatch alarm that takes various actions when the alarm changes state. 
+An alarm watches a single metric over the time period that the user has specified, 
+and performs one or more actions based on the value of the metric relative to a given threshold over a number of time periods. 
+The actions could be sending a notification to an Amazon Simple Notification Service topic (SMS, Email, and HTTP end point.,notifying the Auto Scaling policy or changing the state of the instance to Stop/Terminate.","https://docs.aws.amazon.com/sns/latest/dg/SMSMessages.html","","","","","","","","","","","","","","","","","",""
+"69","A user is trying to delete an Auto Scaling group from CLI. 
+Which of the below mentioned steps are to be performed by the user?","(A)Terminate the instances with the ec2-terminate-instance command","(B)Terminate the Auto Scaling instances with the as-terminate-instance command","(C)Set the minimum size and desired capacity to 0","(D)There is no need to change the capacity. Run the as-delete-group command and it will reset all values to 0","C","If the user wants to delete the Auto Scaling group, the user should manually set the values of the minimum and desired capacity to 0. 
+Otherwise Auto Scaling will not allow for the deletion of the group from CLI. 
+While trying from the AWS console, the user need not set the values to 0 as the Auto Scaling console will automatically do so.","https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-maintain-instance-levels.html","","","","","","","","","","","","","","","","","",""
+"70","An organization has created 50 IAM users. 
+The organization has introduced a new policy which will change the access of an IAM user. 
+How can the organization implement this effectively so that there is no need to apply the policy at the individual user level?","(A)Use the IAM groups and add users as per their role to different groups and apply policy to group","(B)The user can create a policy and apply it to multiple users in a single go with the AWS CLI","(C)Add each user to the IAM role as per their organization role to achieve effective policy setup","(D)Use the IAM role and implement access at the role level","A","With AWS IAM, a group is a collection of IAM users. 
+A group allows the user to specify permissions for acollection of users, which can make it easier to manage the permissions for those users. 
+A group helps an organization manage access in a better way; instead of applying at the individual level, 
+the organization can apply at the group level which is applicable to all the users who are a part of that group.","https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups.html","","","","","","","","","","","","","","","","","",""
+"71","An organization is planning to use AWS for their production roll out. 
+The organization wants to implement automation for deployment such that it will automatically create a LAMP stack, download the latest PHP
+installable from S3 and setup the ELB. Which of the below mentioned AWS services meets the quirement for making an orderly deployment of the software?","(A)AWS Elastic Beanstalk","(B)AWS Cloudfront","(C)AWS Cloudformation","(D)AWS DevOps","C","AWS Cloudformation is an application management tool which provides application modelling, deployment, configuration, management and related activities. Cloudformation provides an easy way to create and delete the collection of related AWS resources and provision them in an orderly way. AWS CloudFormation automates and simplifies the task of repeatedly and predictably creating groups of related resources that power the userâ€™s applications. AWS Cloudfront is a CDN; Elastic Beanstalk does quite a few of the required tasks. However, it is a PAAS which uses a ready AMI. AWS Elastic Beanstalk provides an environment to easily develop and run applications in the cloud.","https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-init.html","","","","","","","","","","","","","","","","","",""
+"72","A user has created a web application with Auto Scaling. The user is regularly monitoring the application and he observed that the traffic is highest on Thursday and Friday between 8 AM to 6 PM. What is the best solution to handle scaling in this case?","(A)Add a new instance manually by 8 AM Thursday and terminate the same by 6 PM Friday","(B)Schedule Auto Scaling to scale up by 8 AM Thursday and scale down after 6 PM on Friday","(C)Schedule a policy which may scale up every day at 8 AM and scales down by 6 PM","(D)Configure a batch process to add a instance by 8 AM and remove it by Friday 6 PM","B","(B)Schedule Auto Scaling to scale up by 8 AM Thursday and scale down after 6 PM on Friday","https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html","","","","","","","","","","","","","","","","","",""
+"73","Which route must be added to your routing table in order to allow connections to the Internet from your subnet?
+","(A)  Destination: 0.0.0.0/0 --> Target: your Internet gateway
+","(B) Destination: 192.168.1.257/0 --> Target: your Internet gateway
+","Destination: 0.0.0.0/33 --> Target: your virtual private gateway
+","(D) Destination: 10.0.0.0/32 --> Target: your virtual private gateway","A","","https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html","","","","","","","","","","","","","","","","","",""
+"74","A user has setup a billing alarm using CloudWatch for $200. 
+The usage of AWS exceeded $200 after some days. 
+The user wants to increase the limit from $200 to $400? 
+What should the user do?","(A)Create a new alarm of $400 and link it with the first alarm","(B)It is not possible to modify the alarm once it has crossed the usage limit","(C)Update the alarm to set the limit at $400 instead of $200","(D)Create a new alarm for the additional $200 amount","C","AWS CloudWatch supports enabling the billing alarm on the total AWS charges. 
+The estimated charges are calculated and sent several times daily to CloudWatch in the form of metric data. 
+This data will be stored for 14 days. This data also includes the estimated charges for every service in AWS used by the user, as well as the estimated overall AWS charges. 
+If the user wants to increase the limit, the user can modify the alarm and specify a new threshold.","https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html","","","","","","","","","","","","","","","","","",""
+"75","A sysadmin has created the below mentioned policy on an S3 bucket named hadoopexam. 
+The bucket has both AWS.jpg and index.html objects.
+
+What does this policy define?
+
+""Statement"": [{
+
+""Sid"": ""Stmt11111111111111"",
+
+""Effect"": ""Allow"",
+
+""Principal"": { ""AWS"": ""*""},
+
+""Action"": [ ""s3:GetObjectAcl"", ""s3:ListBucket"", ""s3:GetObject""],
+
+""Resource"": [ ""arn:aws:s3:::hadoopexam/*.jpg]
+
+}] 
+","(A) It will make all the objects as well as the bucket public","(B)It will throw an error for the wrong action and does not allow to save the policy","(C)It will make the AWS.jpg object as public","(D) It will make the AWS.jpg as well as the hadoopexam bucket as public","B","A sysadmin can grant permission to the S3 objects or the buckets to any user or make objects public using the bucket policy and user policy. 
+Both use the JSON-based access policy language. Generally if user is defining the ACL on the bucket, the objects in the bucket do not inherit it and vice a versa. 
+The bucket policy can be defined at the bucket level which allows the objects as well as the bucket to be public with a single policy applied to that bucket. 
+In the below policy the action says ""S3:ListBucket"" for effect Allow and when there is no bucket name mentioned as a part of the resource, it will throw an error and not save the policy.","https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html","","","","","","","","","","","","","","","","","",""
+"76","Which is an operational process performed by AWS for data security?","(A)AES-256 encryption of data stored on any shared storage device (User responsibility)","(B)Decommissioning of storage devices using industry-standard practices","(C)Background virus scans of EBS volumes and EBS snapshots (No virus scan is performed by AWS on User instances)","(D)Replication of data across multiple AWS Regions (AWS does not replicate data across regions unless done by User)","B","(A) is incorrect, because although you can encrypt EBS volumes, it isn't done ""on any shared storage device""
+
+(C) is incorrect because according to the shared security model, AWS isn't responsible for what goes on EBS volumes, and nothing I've ever read suggests they do anti-virus.
+
+(D) is incorrect because AWS never copies EBS volumes or snapshots across regions. Only under very specific circumstances will AWS copy data across regions, S3 can be configured to do it, and so can DynamoDB.
+
+
+","https://aws.amazon.com/compliance/data-privacy-faq/","","","","","","","","","","","","","","","","","",""
+"77","A user is trying to aggregate all the CloudWatch metric data of the last 1 week. 
+Which of the below mentioned statistics is not available for the user as a part of data aggregation?","(A)Aggregate","(B)Sum","(C)Sample data","(D)Average","A","Amazon CloudWatch is basically a metrics repository. Either the user can send the custom data
+or an AWS product can put metrics into the repository, and the user can retrieve the statistics
+based on those metrics. The statistics are metric data aggregations over specified periods of
+time. Aggregations are made using the namespace, metric name, dimensions, and the data point
+unit of measure, within the time period that is specified by the user. 
+CloudWatch supports Sum, Min, Max, Sample Data and Average statistics aggregation.","https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-cloudwatch-metrics.html","","","","","","","","","","","","","","","","","",""
+"78","An organization is planning to use AWS for their production roll out. The organization wants to implement automation for deployment such that it will automatically create a LAMP stack, download the latest PHP installable from S3 and setup the ELB. Which of the below mentioned AWS services meets the requirement for making an orderly deployment of the software?","(A)AWS Elastic Beanstalk","(B)AWS Cloudfront","(C)AWS Cloudformation","(D)AWS DevOps","C","Cloud Formation also can include bash script to initiate setup.","https://aws.amazon.com/cloudformation/","","","","","","","","","","","","","","","","","",""
+"79","A user has created a subnet with VPC and launched an EC2 instance in that subnet with only default settings. Which of the below mentioned options is ready to use on the EC2 instance as soon as it is launched?","(A)Elastic IP","(B)Private IP","(C)Public IP","(D)Internet gateway","B","A. Elastic IP – Have to set it manually
+C. Public IP – Need an IGW(Internet Gateway) first since it’s a new VPC
+D. Internet Gateway – Need to create it since it’s a new VPC","https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html","","","","","","","","","","","","","","","","","",""
+"80","An organization is setting up programmatic billing access for their AWS account. 
+Which of the below mentioned services is not required or enabled when the organization wants to use programmatic access?","(A)Programmatic access","(B)AWS bucket to hold the billing report","(C)AWS billing alerts","(D)Monthly Billing report","C","Billing alarms can help to protect you against unknowingly accruing charges if you inadvertently use a service outside of the free tier or if traffic exceeds your expectations.
+The question is not referring to notification capabilities but what is required to enable programmatic access. Billing alerts don't serve that purpose, hence C should be the answer.","https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html","","","","","","","","","","","","","","","","","",""
+"81","Per the AWS Acceptable Use Policy, penetration testing of EC2 instances:","(A)May be performed by AWS, and will be performed by AWS upon customer request.","(B)May be performed by AWS, and is periodically performed by AWS.","(C)Are expressly prohibited under all circumstances.","(D)May be performed by the customer on their own instances with prior authorization from AWS.","D","Our Acceptable Use Policy describes permitted and prohibited behavior on AWS and includes descriptions of prohibited security violations and network abuse. However, because penetration testing and other simulated events are frequently indistinguishable from these activities, we have established a policy for customers to request permission to conduct penetration tests and vulnerability scans to or originating from the AWS environment.","https://www.briefmenow.org/amazon/per-the-aws-acceptable-use-policy-penetration-testing-of-ec2-instances/","","","","","","","","","","","","","","","","","",""
+"82","You have an application running on an Amazon Elastic Compute Cloud instance, that uploads 5 GB video objects to Amazon Simple Storage Service (S3). Video uploads are taking longer than expected, resulting in poor application performance. Which method will help improve performance of your application?
+","(A)Enable enhanced networking","(B)Use Amazon S3 multipart upload","(C) Leveraging Amazon CloudFront, use the HTTP POST method to reduce latency.","(D) Use Amazon Elastic Block Store Provisioned IOPs and use an Amazon EBS-optimized
+instance","B","sing multipart upload provides the following advantages:
+
+– Improved throughput—You can upload parts in parallel to improve throughput.
+– Quick recovery from any network issues—Smaller part size minimizes the impact of restarting a failed upload due to a network error.
+– Pause and resume object uploads—You can upload object parts over time. Once you initiate a multipart upload there is no expiry; you must explicitly complete or abort the multipart upload.
+– Begin an upload before you know the final object size—You can upload an object as you are creating it.","https://aws.amazon.com/premiumsupport/knowledge-center/s3-multipart-upload-cli/","","","","","","","","","","","","","","","","","",""
+"83","A user has configured an Auto Scaling group with ELB. The user has enabled detailed CloudWatch monitoring on Auto Scaling.  Which of the below mentioned statements will help the user understand the functionality better?","(A)It is not possible to setup detailed monitoring for Auto Scaling","(B)In this case, Auto Scaling will send data every minute and will charge the user extra","(C)Detailed monitoring will send data every minute without additional charges","(D)Auto Scaling sends data every minute only and does not charge the user","B","Ans might be ELB sends data to CloudWatch every minute only and does not charge the user.
+
+CloudWatch is used to monitor AWS as well as the custom services.  It provides either basic or detailed monitoring for the supported AWS products.  In basic monitoring, a service sends data points to CloudWatch every five minutes,  while in detailed monitoring a service sends data points to CloudWatch every minute.  Elastic Load Balancing includes 10 metrics and 2 dimensions, and sends data to CloudWatch every minute. 
+This does not cost extra.","https://aws.amazon.com/blogs/aws/category/auto-scaling/","","","","","","","","","","","","","","","","","",""
+"84","A system admin is planning to setup event notifications on RDS. 
+Which of the below mentioned services will help the admin setup notifications?","(A)AWS SES","(B)AWS Cloudtrail","(C)AWS Cloudwatch","(D)AWS SNS","D","Amazon RDS uses the Amazon Simple Notification Service to provide a notification when an Amazon RDS event occurs. 
+These notifications can be in any notification form supported by Amazon SNS for an AWS region, such as an email, a text message or a call to an HTTP endpoint.","https://aws.amazon.com/sns/","","","","","","","","","","","","","","","","","",""
+"85","You are building an online store on AWS that uses SQS to process your customer orders. Your backend system needs those messages in the same sequence the customer orders have been put in. How can you achieve that?","(A)It is not possible to do this with SQS","(B)You can use sequencing information on each message","(C)You can do this with SQS but you also need to use SWF","(D)Messages will arrive in the same order by default","B","Amazon SQS makes a best effort to preserve order in messages, but due to the distributed nature of the queue, we cannot guarantee that you will receive messages in the exact order you sent them. You typically place sequencing information or timestamps in your messages so that you can reorder them upon receipt.","https://aws.amazon.com/blogs/developer/tag/message-sequencing/","","","","","","","","","","","","","","","","","",""
+"86","An organization wants to move to Cloud.  They are looking for a secure encrypted database storage option. Which of the below mentioned AWS functionalities helps them to achieve this?","(A)AWS MFA with EBS","(B)AWS EBS encryption","(C)Multi-tier encryption with Redshift","(D)AWS S3 server side storage","B","AWS EBS supports encryption of the volume while creating new volumes. 
+It also supports creating volumes from existing snapshots provided the snapshots are created from encrypted volumes. 
+The data at rest, the I/O as well as all the snapshots of EBS will be encrypted. 
+The encryption occurs on the servers that host the EC2 instances, 
+providing encryption of data as it moves between the EC2 instances and EBS storage. 
+EBS encryption is based on the AES-256 cryptographic algorithm, which is the industry standard.","https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html","","","","","","","","","","","","","","","","","",""
+"87","A user has created a VPC with the public subnet. The user has created a security group for that VPC. Which of the below mentioned statements is true when a security group is created?","(A)It can connect to the AWS services, such as S3 and RDS by default","(B)It will have all the inbound traffic by default","(C)It will have all the outbound traffic by default","(D)It will by default allow traffic to the internet gateway","C","Security groups have no inbound rules but outbound rule is set to allow all traffic by default.","https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html","","","","","","","","","","","","","","","","","",""
+"88","A user is planning to set up the Multi AZ feature of RDS. Which of the below mentioned conditions won't take advantage of the Multi AZ feature?","(A)Availability zone outage","(B)A manual failover of the DB instance using Reboot with failover option","(C)Region outage","(D)When the user changes the DB instance’s server type","C","In the event of a planned or unplanned outage of your DB instance, Amazon RDS automatically switches to a standby replica in another Availability Zone if you have enabled Multi-AZ. The time it takes for the failover to complete depends on the database activity and other conditions at the time the primary DB instance became unavailable. Failover times are typically 60-120 seconds. However, large transactions or a lengthy recovery process can increase failover time. When the failover is complete, it can take additional time for the RDS console UI to reflect the new Availability Zone.","https://aws.amazon.com/rds/details/multi-az/","","","","","","","","","","","","","","","","","",""
+"89","An organization has configured a VPC with an Internet Gateway (IGW). pairs of public and private subnets (each with one subnet per Availability Zone), and an Elastic Load Balancer (ELB) configured to use the public subnets The application s web tier leverages the ELB. Auto Scaling and a mum-AZ RDS database instance The organization would like to eliminate any potential single points ft failure in this design.What step should you take to achieve this organization's objective?","(A)Nothing, there are no single points of failure in this architecture.","(B)Create and attach a second IGW to provide redundant internet connectivity.","(C)Create and configure a second Elastic Load Balancer to provide a redundant load balancer.
+","(D)Create a second multi-AZ RDS instance in another Availability Zone and configurereplication
+to provide a redundant database.","C","ELB is designed to be HA across Availability Zones. You need multiple ELB if you want HA across regions.
+
+“AWS Load Balancer – Cross Network
+
+Many times it happens that after setting up your ELB, you experience significant drops in your performance. The best way to handle this situation is to start with identifying whether your ELB is single AZ or multiple AZ, as single AZ ELB is also considered as one of the Single Points of Failures on AWS Cloud. Once you identify your ELB, it is necessary to make sure ELB loads are kept cross regions.”","https://aws.amazon.com/elasticloadbalancing/","","","","","","","","","","","","","","","","","",""
+"90","If you want to launch Amazon Elastic Compute Cloud (EC2) Instances and assign each Instance
+a predetermined private IP address you should:","(A)Assign a group or sequential Elastic IP address to the instances
+","(B)Launch the instances in a Placement Group
+","(C)Launch the instances in the Amazon virtual Private Cloud (VPC).
+","(D)Use standard EC2 instances since each instance gets a private Domain Name Service (DNS)
+already","C","C is correct, when you’re launching the instance you can specify the IP address if using VPC. EC2 Classic doesn’t support this, as all EC2 instances in Classic share the same subnet with other accounts. EC2 Classic is like the Wild West of Cloud.","https://aws.amazon.com/vpc/","","","","","","","","","","","","","","","","","",""
+"91","You are attempting to connect to an instance in Amazon VPC without success. You have already
+verified that the VPC has an Internet Gateway (IGW) the instance has an associated Elastic IP
+(EIP) and correct security group rules are in place.
+Which VPC component should you evaluate next?","(A)The configuration of a MAT instance","(B)The configuration of the Routing Table","(C)The configuration of the internet Gateway (IGW)
+","(D)The configuration of SRC'DST checking","C","An internet gateway is a horizontally scaled, redundant, and highly available VPC component that allows communication between instances in your VPC and the internet. It therefore imposes no availability risks or bandwidth constraints on your network traffic.","https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html","","","","","","","","","","","","","","","","","",""
+"92","A photo-sharing service stores pictures in Amazon Simple Storage Service (S3) and allows application sign-in using an OpenID Connect-compatible identity provider. Which AWS Security Token Service approach to temporary access should you use for the Amazon S3 operations?
+","(A) SAML-based Identity Federation","(B) Cross-Account Access","(C) AWS Identity and Access Management roles","(D)  Web Identity Federation","D","Web identity federation – You can let users sign in using a well-known third party identity provider such as Login with Amazon, Facebook, Google, or any OpenID Connect (OIDC) 2.0 compatible provider.
+
+AWS STS web identity federation supports Login with Amazon, Facebook, Google, and any OpenID Connect (OICD)-compatible identity provider.","https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc.html","","","","","","","","","","","","","","","","","",""
+"93","You manually launch a NAT AMI in a public subnet. The network is properly configured. Security groups and network access control lists are property configured. Instances in a private subnet can access the NAT. The NAT can access the Internet. However, private instances cannot access the Internet. What additional step is required to allow access from the private instances?
+","(A) Enable Source/Destination Check on the private Instances.","(B) Enable Source/Destination Check on the NAT instance.","(C) Disable Source/Destination Check on the private instances.
+ ","(D)  Disable Source/Destination Check on the NAT instance.","D","By default the NAT will perform Source Checks before it forwards the packet it received from EC2 instance out to the Internet and hence Source Checks need to be disabled on the NAT instance.","https://docs.aws.amazon.com/vpc/latest/userguide/VPC_NAT_Instance.html","","","","","","","","","","","","","","","","","",""
+"94","You have a web-style application with a stateless but CPU and memory-intensive web tier running on a cc2 8xlarge EC2 instance inside of a VPC The instance when under load is having problems returning requests within the SLA as defined by your business The application maintains its state in a DynamoDB table, but the data tier is properly provisioned and responses are consistently fast. How can you best resolve the issue of the application responses not meeting your SLA?","(A)Add another cc2 8xlarge application instance, and put both behind an Elastic Load Balancer","(B)Move the cc2 8xlarge to the same Availability Zone as the DynamoDB table","(C)Cache the database responses in ElastiCache for more rapid access","(D)Move the database from DynamoDB to RDS MySQL in scale-out read-replica configuration","B","stateless – so you cant use load balancer.. And its a VPC so they both are may be in different availability zone.. Placing this web/app server along with the DB server since they store the sessions in Dynamo DB is the right answer","https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html","","","","","","","","","","","","","","","","","",""
+"95","Please select the Amazon EC2 resource which cannot be tagged.
+
+","(A) images (AMIs, kernels, RAM disks)","(B)Amazon EBS volumes","(C)Elastic IP addresses
+","(D)VPCs","C","No tagging support for EIP.","https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-restrictions","","","","","","","","","","","","","","","","","",""
+"96","Which of the following services natively encrypts data at rest within an AWS region? 
+
+","(A)  AWS Storage Gateway
+","(B) Amazon DynamoDB
+","(C) Amazon CloudFront
+","(D) Amazon Simple Queue Service","A","AWS services support data encrypted at rest:
+-S3
+-Glacier
+-RDS
+-EBS
+-EMR
+-Redshift
+-storage gateway","https://docs.aws.amazon.com/storagegateway/latest/userguide/encryption.html","","","","","","","","","","","","","","","","","",""
+"97","You have identified network throughput as a bottleneck on your m1. small EC2 instance when uploading data Into Amazon S3 In the same region. How do you remedy this situation?","(A)Add an additional ENI","(B)Change to a larger Instance","(C)Use DirectConnect between EC2 and S3","(D)Use EBS PIOPS on the local volume","B","T2 instance type replacement T1,M1 instance.","https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html","","","","","","","","","","","","","","","","","",""
+"98","An application that you are managing has EC2 instances & Dynamo DB tables deployed to several AWS Regions In order to monitor the performance of the application globally, you would like to see two graphs 1) Avg CPU Utilization across all EC2 instances and 2) Number of Throttled Requests for all DynamoDB tables. How can you accomplish this?","(A)Tag your resources with the application name, and select the tag name as the dimension in the Cloudwatch Management console to view the respective graphs","(B)Use the Cloud Watch CLI tools to pull the respective metrics from each regional endpoint Aggregate the data offline & store it for graphing in CloudWatch.","(C)Add SNMP traps to each instance and DynamoDB table Leverage a central monitoring server to capture data from each instance and table Put the aggregate data into Cloud Watch for graphing.
+","(D)Add a CloudWatch agent to each instance and attach one to each DynamoDB table. When configuring the agent set the appropriate application name & view the graphs in CloudWatch.","C","SNMP Traps are alert messages sent from a remote SNMP-enabled device to a central collector, the ""SNMP manager"". A Trap might tell you that a device is overheating, for example. (As you'll recall, SNMP is one possible protocol that devices can use to communicate.)","https://docs.aws.amazon.com/zh_cn/apigateway/latest/developerguide/api-gateway-request-throttling.html","","","","","","","","","","","","","","","","","",""
+"99","What is a placement group?","(A)A collection of Auto Scaling groups in the same Region","(B)Feature that enables EC2 instances to interact with each other via nigh bandwidth, low
+latency connections","(C)A collection of Elastic Load Balancers in the same Region or Availability Zone
+","(D)A collection of authorized Cloud Front edge locations for a distribution","C","A placement group is a logical grouping of instances within a single Availability Zone.","https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html","","","","","","","","","","","","","","","","","",""
+"100","A startup company hired you to help them build a mobile application, that will ultimately store billions of images and videos in Amazon Simple Storage Service (S3). The company is lean on funding, and wants to minimize operational costs, however, they have an aggressive marketing plan, and expect to double their current installation base every six months. Due to the nature of their business, they are expecting sudden and large increases in traffic to and from S3, and need to ensure that it can handle the performance needs of their application.?? What other information must you gather from this customer in order to determine whether S3 is the right option?
+","(A)You must know how many customers the company has today, because this is critical in understanding what their customer base will be in two years.","(B)You must find out the total number of requests per second at peak usage.","(C)You must know the size of the individual objects being written to S3, in order to properly
+design the key namespace.","(D)In order to build the key namespace correctly, you must understand the total amount of
+storage needs for each S3 bucket.","D","You must find out the total number of requests per second at peak usage.
+
+This is because the S3 api does have limits on the requests per second.
+
+""This topic discusses Amazon S3 best practices for optimizing performance depending on your request rates. If your workload in an Amazon S3 bucket routinely exceeds 100 PUT/LIST/DELETE requests per second or more than 300 GET requests per second, follow the guidelines in this topic to ensure the best performance and scalability.""","http://docs.aws.amazon.com/AmazonS3/latest/dev/request-rate-perf-considerations.html","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","","",""

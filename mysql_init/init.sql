@@ -30,6 +30,14 @@ create table assoc_sa_questions (
 	PRIMARY KEY (question_id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+LOAD DATA LOCAL INFILE  '/docker-entrypoint-initdb.d/SA.csv'
+INTO TABLE `chatbot_db`.`assoc_sa_questions`
+CHARACTER SET UTF8
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
 create table assoc_dev_questions (
 	question_id INTEGER(255),
 	question_content TEXT,
@@ -42,6 +50,16 @@ create table assoc_dev_questions (
 	external_link VARCHAR(255),
 	PRIMARY KEY (question_id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+LOAD DATA LOCAL INFILE  '/docker-entrypoint-initdb.d/Develope.csv'
+INTO TABLE `chatbot_db`.`assoc_dev_questions`
+CHARACTER SET UTF8
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+
 
 create table assoc_sys_questions (
 	question_id INTEGER(255),
@@ -56,7 +74,13 @@ create table assoc_sys_questions (
 	PRIMARY KEY (question_id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-insert into assoc_sys_questions values (1,'Which is an operational process performed by AWS for data security?','AES-256 encryption of data stored on any shared storage device (User responsibility)','Decommissioning of storage devices using industry-standard practices','Background virus scans of EBS volumes and EBS snapshots (No virus scan is performed by AWS on User instances)','Replication of data across multiple AWS Regions (AWS does not replicate data across regions unless done by User)','B','hhhhhh','ghjkkl');
+LOAD DATA LOCAL INFILE  '/docker-entrypoint-initdb.d/SYS.csv'
+INTO TABLE `chatbot_db`.`assoc_sys_questions`
+CHARACTER SET UTF8
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
 
 create user 'read_only_user'@'%' IDENTIFIED BY 'iii';
 GRANT SELECT ON chatbot_db.users TO 'read_only_user'@'%' IDENTIFIED BY 'iii';
@@ -64,4 +88,10 @@ GRANT SELECT ON chatbot_db.menus TO 'read_only_user'@'%' IDENTIFIED BY 'iii';
 GRANT SELECT ON chatbot_db.assoc_sa_questions TO 'read_only_user'@'%' IDENTIFIED BY 'iii';
 GRANT SELECT ON chatbot_db.assoc_dev_questions TO 'read_only_user'@'%' IDENTIFIED BY 'iii';
 GRANT SELECT ON chatbot_db.assoc_sys_questions TO 'read_only_user'@'%' IDENTIFIED BY 'iii';
+
+
+
+
+
+
 
