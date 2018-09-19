@@ -24,7 +24,7 @@ put /users還有些許問題要改善
 解決了post跟put接口的一些問題
 
 
-* 9/14
+* 9/14 (devops)
 將jupyter與db於docker-compose進行links
 將code.ipynb打包為code.py
 將jupyter的CMD預設執行code.py開啟API服務
@@ -32,8 +32,13 @@ put /users還有些許問題要改善
 * 9/15
 將所有image更改為dockerfile形式
 
-*9/16
+* 9/16 （devops）
 開發完成 將jupyter 替換為ubuntu dockerfile 並更名為chatbot_api
 新增資料夾dockerfile來放置dockerfile檔案
 新增dockerfile-api及更新docker-compose
 更改code.py延時100秒連線資料庫
+
+* 9/17 （開發）
+發現自己的docker-compose被改動，改回成之前舊有的版整本
+並新增lopgging套件的更新程式碼
+
