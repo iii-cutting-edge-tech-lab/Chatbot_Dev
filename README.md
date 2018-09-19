@@ -42,3 +42,6 @@ put /users還有些許問題要改善
 發現自己的docker-compose被改動，改回成之前舊有的版整本
 並新增lopgging套件的更新程式碼
 
+
+* 9/19(devops)
+更新code.py程式碼

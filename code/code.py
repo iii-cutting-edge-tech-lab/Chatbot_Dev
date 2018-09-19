@@ -1,14 +1,13 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[3]:
 
 
 #製作flask環境
 from flask import Flask, request, jsonify
 import datetime
 import pymysql
-
 
 #增加等待時間 
 import time
@@ -17,6 +16,7 @@ time.sleep( 100 )
 #呼叫出Flask
 app = Flask(__name__)
 
+
 #建立與mysql的連線
 conn = pymysql.connect(host='db', port=3306, user='root', passwd='iii', db='chatbot_db',charset='utf8mb4')
 
@@ -24,7 +24,7 @@ conn = pymysql.connect(host='db', port=3306, user='root', passwd='iii', db='chat
 cur = conn.cursor()
 
 
-# In[2]:
+# In[4]:
 
 
 #接口功能：新增使用者
@@ -76,7 +76,7 @@ def add_user():
     return jsonify(result)
 
 
-# In[3]:
+# In[5]:
 
 
 #接口功能：檢視單一使用者
@@ -110,7 +110,7 @@ def read_user(userid):
         return jsonify(result)
 
 
-# In[4]:
+# In[6]:
 
 
 #接口功能：檢視所有使用者
@@ -147,7 +147,7 @@ def read_users():
     return jsonify(answer)
 
 
-# In[5]:
+# In[7]:
 
 
 #接口功能：更新使用者
@@ -194,7 +194,7 @@ def update_user(userid):
     return jsonify(result)
 
 
-# In[6]:
+# In[8]:
 
 
 #接口功能：新增menu資料
@@ -243,7 +243,7 @@ def add_menu():
     
 
 
-# In[7]:
+# In[9]:
 
 
 #接口功能：檢視question sa的資料
@@ -294,7 +294,7 @@ def test_sa():
     
 
 
-# In[8]:
+# In[10]:
 
 
 @app.route('/question/sysops',methods=['GET'])
@@ -334,7 +334,7 @@ def test_sys():
     return jsonify(result)
 
 
-# In[9]:
+# In[11]:
 
 
 @app.route('/question/devlop',methods=['GET'])
@@ -374,38 +374,26 @@ def test_dev():
     return jsonify(result)
 
 
-# In[10]:
+# In[13]:
 
 
 import logging
-from logging.handlers import TimedRotatingFileHandler
-
-def log():
-    #請你給我一個 Log 的分身，他的名字叫做.... __name__ (function 的名稱)！！
-    logger = logging.getLogger( __name__ )
-    #設定這個檔案要處理的情報等級，只要是 info 等級或以上的就寫入檔案
-    logger.setLevel(logging.INFO)
-    #關於 log 將要輸出的檔案，請你按照下面的設定logging.FileHandler(檔名,動作,格式)
-    fh = logging.FileHandler(datetime.datetime.utcnow().strftime("%Y%m%d")+'.log', 'w', 'utf-8')
-    #設定這個檔案要處理的情報等級，只要是 debug 等級或以上的就寫入檔案
-    fh.setLevel(logging.DEBUG)
-    # create console handler with a higher log level
-    #關於 console(也就是cmd 那個黑黑的畫面)，請你按照下面的設定，幫我處理一下
-    ch = logging.StreamHandler()
-    #設定 Console 要處理的情報等級，只要是 Info 等級的就印出來
-    ch.setLevel(logging.INFO)
-    # create formatter and add it to the handlers
-    # log 印出來的格式
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    #將 印出來的格式和 File Handle, Console Handle 物件組合在一起
-    fh.setFormatter(formatter)
-    ch.setFormatter(formatter)
-    #加上這個!!!!!每天深夜換檔案，檔名就使用日期.log
-    logHandler = TimedRotatingFileHandler(datetime.datetime.utcnow().strftime("%Y%m%d")+".log",when="midnight")
-    #log 的分身組合 File Handle 和 Console Handle 和 logHandler
-    logger.addHandler(fh)
-    logger.addHandler(ch)
-    logger.addHandler(logHandler) 
+#參考:http://zwindr.blogspot.com/2016/08/python-logging.html
+# 基礎設定
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+                    datefmt='%m-%d %H:%M',
+                    handlers = [logging.FileHandler('my.log', 'w', 'utf-8'),])
+ 
+# 定義 handler 輸出 sys.stderr
+console = logging.StreamHandler()
+console.setLevel(logging.DEBUG)
+# 設定輸出格式
+formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
+# handler 設定輸出格式
+console.setFormatter(formatter)
+# 加入 hander 到 root logger
+logging.getLogger('').addHandler(console)
 
 
 # In[ ]:
@@ -414,19 +402,8 @@ def log():
 #__name__ == __main__ 代表你執行這個模塊（py檔）時會成立
 #假如你是被別的檔案import的話，__name__ == 檔案名稱，這個if就不會成立
 if __name__=='__main__':
-    #運行log
-    log()
+
     #運行flask server，運行在0.0.0.0:5000
     #要特別注意假如運行在127.0.0.1的話，會變成只有本機連的到，外網無法
     app.run(host='0.0.0.0',port=5000)
-
-
-# In[ ]:
-
-
-#做一個測試接口，接口位置在/hello，使用GET的http method
-@app.route('/hello',methods=['GET'])
-def hello():
-    a = 'Hello , World!!'
-    return a
 
