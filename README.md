@@ -45,3 +45,6 @@ put /users還有些許問題要改善
 
 * 9/19(devops)
 更新code.py程式碼
+
+* 9/22 (aws)
+將CSV存入S3桶子
