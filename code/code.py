@@ -383,7 +383,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                     datefmt='%m-%d %H:%M',
-                    handlers = [logging.FileHandler('my.log', 'w', 'utf-8'),])
+                    handlers = [logging.FileHandler('/home/jovyan/work/my.log', 'w', 'utf-8'),])
  
 # 定義 handler 輸出 sys.stderr
 console = logging.StreamHandler()
