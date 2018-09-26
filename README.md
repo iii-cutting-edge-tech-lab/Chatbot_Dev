@@ -1,11 +1,11 @@
-​​code/
-​​  #開發組的程式碼
-​​  code.ipynb
-​​  #方便devops的開啟用成py檔
-​​  code.py
-​​  # 裝API的log
-​​  my.log 
-​​mysql_init/
+code/  
+  #開發組的程式碼  
+  code.ipynb  
+  #方便devops的開啟用成py檔  
+  code.py  
+  # 裝API的log  
+  my.log  
+  mysql_init/  
 ​​  #devops組製作的初始化資料庫
 ​​  init.sql
 ​​  Develope.csv  # 內裝develope的考題 
