@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[3]:
+# In[1]:
 
 
 #製作flask環境
@@ -9,7 +9,7 @@ from flask import Flask, request, jsonify
 import datetime
 import pymysql
 
-#增加等待時間 
+#增加等待時間，為了整合的需要所新增的 
 import time
 time.sleep( 100 )
 
@@ -24,10 +24,10 @@ conn = pymysql.connect(host='db', port=3306, user='root', passwd='iii', db='chat
 cur = conn.cursor()
 
 
-# In[4]:
+# In[2]:
 
 
-#接口功能：新增使用者
+#接口功能：對資料庫新增使用者資料
 #接口位置：/users，使用post的http method
 @app.route('/users',methods=['POST'])
 def add_user():
@@ -37,11 +37,12 @@ def add_user():
     a = request.get_json()
     #方便錯誤排除
     error = None
-    #對ststus跟img還沒啥想法先不設定
     
-    if not a['user_register_menu']:
-        #對menu完全沒想法先填一
-        a['user_register_menu'] = 1
+    #可以注意到我沒有對a['user_register_menu']進行格式判斷，因為那個是Line server會給的值所以必定會有，就不進行格式除錯
+        
+    if not a['user_status']:
+        #假如用戶資料沒狀態給就先給個空格
+        a['user_status'] = ' '
         
     if not a['user_open_id']:
         #id沒填的話改變顯示的錯誤訊息
@@ -49,9 +50,13 @@ def add_user():
     elif not a['user_nick_name']:
         #name沒填的話改變顯示的錯誤訊息
         error = 'Username is required.'
+    #img沒填的話
+    elif not a['user_img']:
+        error = 'Where is your picture?'
         
     #看看資料庫內是否有重複的id
     cur.execute('SELECT user_open_id FROM chatbot_db.users WHERE user_open_id = ("%s")' % (a['user_open_id']))
+    #將execute的結果擷取出來
     test = cur.fetchone() 
     if test:
         #有重複的話改變顯示的錯誤訊息
@@ -59,9 +64,14 @@ def add_user():
     
     #沒有錯誤的話，將資料新增進資料庫
     if error is None:
-        #插入資料庫中
+        #插入資料庫中，要按照資料庫的格式塞入
         insertsql=("INSERT INTO chatbot_db.users VALUES ( %s,%s,%s,%s,%s,%s )") 
-        value = (a['user_open_id'],a['user_nick_name'],a['user_status'],a['user_img'],time,a['user_register_menu'])
+        value = (a['user_open_id'],
+                 a['user_nick_name'],
+                 a['user_status'],
+                 a['user_img'],
+                 time,
+                 a['user_register_menu'])
         cur.execute(insertsql , value)
         #將資料送進資料庫中
         conn.commit()
@@ -70,16 +80,17 @@ def add_user():
         return jsonify(result)
     
     
-    #回傳一個錯誤的描述
+    #製作一個錯誤的描述
     result = {"status_describe":"{}".format(error)}
     
+    #回傳一個錯誤的描述
     return jsonify(result)
 
 
-# In[5]:
+# In[3]:
 
 
-#接口功能：檢視單一使用者
+#接口功能：檢視指定使用者資訊
 #接口位置：/users/<userid>，運用了url parameter，使用get的http method
 @app.route('/users/<userid>',methods=['GET'])
 #特別注意這邊有打userid，url parameter就是這樣使用
@@ -90,7 +101,7 @@ def read_user(userid):
         )
     #將剛剛execute的資料取出來
     user = cur.fetchone()
-    #假如有找到符合的資料
+    #假如有找到符合的資料，包裝成統一格式並回傳
     if user is not None:
         user = {
             "user_open_id":user[0],
@@ -102,7 +113,7 @@ def read_user(userid):
         }
         #轉成line要的json格式
         return jsonify(user)
-    #假如沒有找到符合的資料
+    #假如沒有找到符合的資料，回傳一個錯誤訊息
     else:
         result = {
             "status_describe":"Please enter the right id!!"
@@ -110,10 +121,10 @@ def read_user(userid):
         return jsonify(result)
 
 
-# In[6]:
+# In[4]:
 
 
-#接口功能：檢視所有使用者
+#接口功能：檢視所有使用者資訊
 #接口位置：/users，使用get的http method
 @app.route('/users',methods=['GET'])
 def read_users():
@@ -147,17 +158,20 @@ def read_users():
     return jsonify(answer)
 
 
-# In[7]:
+# In[5]:
 
 
-#接口功能：更新使用者
+#接口功能：更新指定使用者資訊
 #接口位置：/users/<userid>，使用put的http method
 @app.route('/users/<userid>',methods=['PUT'])
+#由於使用url parameter 所以有擷取userid
 def update_user(userid):
     #取出傳過來的資料
     a = request.get_json()
     #方便錯誤排除
     error = None
+    
+    #可以注意到我沒有對a['user_register_menu']進行格式判斷，因為那個是Line server會給的值所以必定會有，就不進行格式除錯
     
     #看看資料庫內是否有重複的id
     cur.execute('SELECT user_open_id FROM chatbot_db.users WHERE user_open_id = ("%s")' % (userid))
@@ -172,10 +186,7 @@ def update_user(userid):
     #img沒填的話
     elif not a['user_img']:
         error = 'Where is your picture?'
-    #menu沒填的話
-    elif not a['user_register_menu']:
-        #對menu完全沒想法先填一
-        a['user_register_menu'] = 1
+
 
     #沒有錯誤的話，將資料更新進資料庫
     if error is None:
@@ -188,13 +199,14 @@ def update_user(userid):
         return jsonify(result)
     
     
-    #回傳一個錯誤的描述
+    #製作一個錯誤的描述
     result = {"status_describe":"{}".format(error)}
     
+    #回傳轉檔成json格式的錯誤描述
     return jsonify(result)
 
 
-# In[8]:
+# In[6]:
 
 
 #接口功能：新增menu資料
@@ -231,47 +243,41 @@ def add_menu():
         conn.commit()
         #回傳成功訊息
         result =  { "status_describe":"success add menu" }
-        #轉檔
+        #將訊息轉成json格式並回傳
         return jsonify(result)
     
     
     #書寫錯誤訊息
     result = {"status_describe":"{}".format(error)}
-    #轉檔
+    #將訊息轉成json格式並回傳
     return jsonify(result)
     
     
 
 
-# In[9]:
+# In[7]:
 
 
-#接口功能：檢視question sa的資料
-#接口位置：/question/sa，使用get的http method
-@app.route('/question/sa',methods=['GET'])
-def test_sa():
+#唯一的變數是擷取的SQL table不同
+def test(table_type):
     #使用了query string的方法，擷取出變數值
-    question = request.args.get('question_id')
+    questionid = request.args.get('question_id')
     #方便書寫錯誤的訊息
     error = None
     #假如沒收到變數
-    if question is None:
+    if questionid is None:
         error = 'Please enter the question_id.'
     
     #看有沒有重複的資料
-    cur.execute('SELECT question_id FROM chatbot_db.assoc_sa_questions WHERE question_id = ("%s")' % (question))
+    cur.execute('SELECT * FROM chatbot_db.%s WHERE question_id = ("%s")' % (table_type,questionid))
     #擷取execute的資料
-    test = cur.fetchone()
+    result = cur.fetchone()
     #假如沒有重複的
-    if not test:
+    if not result:
         error = 'Please enter the right question_id'
     
     #假如沒有出錯
     if error is None:
-        #抓出符合id的資料
-        readsql=('SELECT * FROM chatbot_db.assoc_sa_questions WHERE question_id=("%s")' % (question))
-        cur.execute(readsql)
-        result=cur.fetchone()
         result = {
           "question_id":result[0],
           "question_content":result[1],
@@ -291,90 +297,27 @@ def test_sa():
     result = {"status_describe":"{}".format(error)}
     
     return jsonify(result)
-    
 
 
-# In[10]:
+# In[8]:
 
+
+#接口功能：檢視question sa的資料
+#接口位置：/question/sa，使用get的http method
+@app.route('/question/sa',methods=['GET'])
+def test_sa():
+    return test('assoc_sa_questions')
 
 @app.route('/question/sysops',methods=['GET'])
 def test_sys():
-    question = request.args.get('question_id')
-    error = None
-    if question is None:
-        error = 'Please enter the question_id.'
-    
-    cur.execute('SELECT question_id FROM chatbot_db.assoc_sys_questions WHERE question_id = ("%s")' % (question))
-    test = cur.fetchone()
-    if not test:
-        error = 'Please enter the right question_id'
-    
-    if error is None:
-        readsql=('SELECT * FROM chatbot_db.assoc_sys_questions WHERE question_id=("%s")' % (question))
-        cur.execute(readsql)
-        result=cur.fetchone()
-        result = {
-          "question_id":result[0],
-          "question_content":result[1],
-          "answer1_content":result[2],
-          "answer2_content":result[3],
-          "answer3_content":result[4],
-          "answer4_content":result[5],
-          "true_answer":result[6],
-          "true_answer_decribe_content" : result[7],
-          "external_link": result[8]
-        }
-        
-        
-        return jsonify(result)
-    
-    
-    result = {"status_describe":"{}".format(error)}
-    
-    return jsonify(result)
-
-
-# In[11]:
-
+    return test('assoc_sys_questions')
 
 @app.route('/question/devlop',methods=['GET'])
 def test_dev():
-    question = request.args.get('question_id')
-    error = None
-    if question is None:
-        error = 'Please enter the question_id.'
-    
-    cur.execute('SELECT question_id FROM chatbot_db.assoc_dev_questions WHERE question_id = ("%s")' % (question))
-    test = cur.fetchone()
-    if not test:
-        error = 'Please enter the right question_id'
-    
-    if error is None:
-        readsql=('SELECT * FROM chatbot_db.assoc_dev_questions WHERE question_id=("%s")' % (question))
-        cur.execute(readsql)
-        result=cur.fetchone()
-        result = {
-          "question_id":result[0],
-          "question_content":result[1],
-          "answer1_content":result[2],
-          "answer2_content":result[3],
-          "answer3_content":result[4],
-          "answer4_content":result[5],
-          "true_answer":result[6],
-          "true_answer_decribe_content" : result[7],
-          "external_link": result[8]
-        }
-        
-        
-        return jsonify(result)
-    
-    
-    result = {"status_describe":"{}".format(error)}
-    
-    return jsonify(result)
+    return test('assoc_dev_questions')
 
 
-# In[13]:
+# In[9]:
 
 
 import logging
@@ -383,10 +326,12 @@ import logging
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                     datefmt='%m-%d %H:%M',
+                    #製作名為my.log的檔案裝log
                     handlers = [logging.FileHandler('/home/jovyan/work/my.log', 'w', 'utf-8'),])
  
 # 定義 handler 輸出 sys.stderr
 console = logging.StreamHandler()
+#定義要擷取的log最低等級到哪
 console.setLevel(logging.DEBUG)
 # 設定輸出格式
 formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
