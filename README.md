@@ -9,9 +9,11 @@
 開啟環境流程  
 >docker-compose up -d  
 
-透過瀏覽器訪問  
+透過瀏覽器訪問jupyter  
 http://本機ip:8880  
-  
+
+程式碼都放在code內，可以用Jupyter編輯  
+
 
 以下是repo的資料夾結構  
 
