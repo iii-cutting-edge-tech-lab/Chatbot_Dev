@@ -6,7 +6,7 @@
 
 >cd Chatbot_Dev  
 
-開啟環境流程  
+開啟環境流程(只供開發使用，只開啟jupyter跟mysql的container)  
 >docker-compose up -d  
 
 透過瀏覽器訪問jupyter  
