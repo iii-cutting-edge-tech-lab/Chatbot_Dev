@@ -1,5 +1,18 @@
 # Chatbot_Dev
 --------------------------------------------
+
+先  
+>git clone https://github.com/iii-cutting-edge-tech-lab/Chatbot_Dev.git  
+
+>cd Chatbot_Dev  
+
+開啟環境流程  
+>docker-compose up -d  
+
+透過瀏覽器訪問  
+http://本機ip:8880  
+  
+
 以下是repo的資料夾結構  
 
 code/  
