@@ -10,3 +10,20 @@ services:
     volumes: 
       - ./mysql_data:/var/lib/mysql
       - ./mysql_init:/docker-entrypoint-initdb.d/
+  api:
+    image: asoo571314/jupyter-notebook:1.0
+    container_name: chatbot_api
+    restart: always
+    user: root
+    environment:
+      - GRANT_SUDO=yes
+    ports:
+      - "8888:8888"
+      - "5000:5000"
+    depends_on:
+      - db
+    links:
+      - db
+    volumes:
+      - ./code:/home/jovyan/work/
+    command:  start-notebook.sh --NotebookApp.token=''
